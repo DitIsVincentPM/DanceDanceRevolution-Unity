@@ -17,10 +17,10 @@ public class MenuManager : MonoBehaviour
 
     public void ConnectionSuccessful()
     {
+        SongManager.instance.LoadSong("over the top");
         audioSource.enabled = true;
         audioSource.Play();
-        
-        // SongManager.instance.StartSong();
+        SongManager.instance.StartSong();
     }
     
     public void StartConnectingScreen()

@@ -1,0 +1,2128 @@
+{
+    "notes": [
+        {
+            "time": 7.434000015258789,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 7.834000110626221,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 8.234000205993653,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 8.633999824523926,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 9.034000396728516,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 9.434000015258789,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 9.833999633789063,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 10.633999824523926,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 11.034000396728516,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 11.434000015258789,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 11.833999633789063,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 12.234000205993653,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 12.633999824523926,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 13.034000396728516,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 13.234000205993653,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 13.534000396728516,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 13.833999633789063,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 14.234000205993653,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 14.633999824523926,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 15.034000396728516,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 15.434000015258789,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 15.833999633789063,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 16.233999252319337,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 16.634000778198243,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 17.034000396728517,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 17.43400001525879,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 17.833999633789064,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 18.233999252319337,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 18.634000778198243,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 19.034000396728517,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 19.43400001525879,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 19.833999633789064,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 20.233999252319337,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 20.634000778198243,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 20.634000778198243,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 21.034000396728517,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 21.43400001525879,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 21.43400001525879,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 21.833999633789064,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 22.233999252319337,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 22.233999252319337,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 22.634000778198243,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 23.034000396728517,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 23.034000396728517,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 23.43400001525879,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 23.833999633789064,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 23.833999633789064,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 24.233999252319337,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 24.634000778198243,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 24.634000778198243,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 25.034000396728517,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 25.43400001525879,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 25.43400001525879,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 25.833999633789064,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 26.233999252319337,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 26.233999252319337,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 26.634000778198243,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 26.833999633789064,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 27.034000396728517,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 27.233999252319337,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 27.43400001525879,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 27.43400001525879,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 27.833999633789064,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 27.833999633789064,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 28.233999252319337,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 28.634000778198243,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 28.634000778198243,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 29.034000396728517,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 29.43400001525879,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 29.43400001525879,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 29.833999633789064,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 30.233999252319337,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 30.233999252319337,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 30.634000778198243,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 31.034000396728517,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 31.034000396728517,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 31.43400001525879,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 31.833999633789064,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 31.833999633789064,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 32.23400115966797,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 32.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 32.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.034000396728519,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 33.83399963378906,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 34.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 34.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 34.63399887084961,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 35.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 35.034000396728519,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 35.433998107910159,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 35.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 35.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 36.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 36.63399887084961,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 36.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 37.034000396728519,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 37.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 37.433998107910159,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 37.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 38.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 38.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 38.63399887084961,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 39.034000396728519,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 39.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 39.433998107910159,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 39.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 40.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 40.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 41.034000396728519,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 41.433998107910159,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 41.433998107910159,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 42.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 42.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 42.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 42.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.034000396728519,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.33399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 43.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 44.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 44.63399887084961,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 44.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 45.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 45.433998107910159,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 45.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 45.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 46.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 46.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 46.534000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 46.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 47.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 47.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 47.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 47.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 47.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 48.433998107910159,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 48.63399887084961,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 48.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 49.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 49.433998107910159,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 49.433998107910159,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 49.73400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 50.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 50.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 50.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 50.63399887084961,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 51.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 51.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 51.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 51.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 51.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 52.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 52.63399887084961,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 52.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 52.933998107910159,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 53.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 53.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 53.433998107910159,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 53.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 54.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 54.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 54.63399887084961,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 55.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 55.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 55.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 55.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 55.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 56.13399887084961,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 56.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 56.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 56.63399887084961,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 57.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 57.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 57.433998107910159,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 57.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 58.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 58.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 58.63399887084961,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.034000396728519,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.33399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 59.83399963378906,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 60.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 60.63399887084961,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 60.63399887084961,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 61.034000396728519,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 61.433998107910159,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 61.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 61.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 62.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 62.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 62.534000396728519,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 62.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 63.034000396728519,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 63.034000396728519,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 63.433998107910159,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 63.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 63.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 64.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 64.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 64.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 65.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 65.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 65.43399810791016,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 65.73400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 66.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 66.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 66.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 66.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 67.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 67.43399810791016,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 67.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 68.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 68.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 69.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 69.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 69.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 70.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 70.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 71.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 71.43399810791016,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 71.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 72.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 72.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 73.03399658203125,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 73.43399810791016,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 73.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 74.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 74.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 75.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 75.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 75.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 76.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 77.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 77.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 77.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 78.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 78.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 79.03399658203125,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 2.0
+        },
+        {
+            "time": 81.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 81.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 81.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 81.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 81.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 81.83399963378906,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 82.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 82.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 82.63400268554688,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 83.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 83.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 83.43399810791016,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 83.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 83.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 84.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 84.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 84.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 85.03399658203125,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 85.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 85.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 85.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 86.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 86.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 86.63400268554688,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 87.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 87.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 87.43399810791016,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 87.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 87.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 88.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 88.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 88.23400115966797,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 88.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 88.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 89.03399658203125,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 89.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 89.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 89.83399963378906,
+            "lane": 0,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 90.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 90.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 90.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 91.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 91.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 91.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 91.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 91.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 92.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 92.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 92.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.03399658203125,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.43399810791016,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 93.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 94.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 94.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 94.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 94.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 94.63400268554688,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 95.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 95.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 95.43399810791016,
+            "lane": 2,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 95.83399963378906,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 95.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 96.23400115966797,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 96.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 96.63400268554688,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 97.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 97.43399810791016,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 97.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 97.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 98.23400115966797,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 98.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 98.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 99.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 99.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 99.43399810791016,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 99.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 99.83399963378906,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 100.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 100.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 100.63400268554688,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 100.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 101.03399658203125,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 101.03399658203125,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 101.43399810791016,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 101.43399810791016,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 101.83399963378906,
+            "lane": 1,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 102.23400115966797,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 102.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 102.63400268554688,
+            "lane": 3,
+            "type": "hold",
+            "holdDuration": 0.4000000059604645
+        },
+        {
+            "time": 103.03399658203125,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 103.03399658203125,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 103.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 103.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 103.83399963378906,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 104.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 104.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 104.63400268554688,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 105.03399658203125,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 105.43399810791016,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 105.43399810791016,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 105.83399963378906,
+            "lane": 2,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 106.23400115966797,
+            "lane": 1,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 106.23400115966797,
+            "lane": 3,
+            "type": "normal",
+            "holdDuration": 0.0
+        },
+        {
+            "time": 106.63400268554688,
+            "lane": 0,
+            "type": "normal",
+            "holdDuration": 0.0
+        }
+    ]
+}

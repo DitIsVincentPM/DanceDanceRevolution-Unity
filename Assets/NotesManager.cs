@@ -4,7 +4,7 @@ using TMPro;
 
 public class NotesManager : MonoBehaviour
 {
-    public float noteScrollSpeed = 5f;
+    public float noteScrollSpeed = 5f;  // Scroll speed multiplier
     public RectTransform notesParentCanvas;
 
     public Transform hitPositionLeft;
@@ -49,10 +49,25 @@ public class NotesManager : MonoBehaviour
             nextNoteIndex++;
         }
 
+        // Scroll notes down based on scroll speed
+        ScrollNotes();
+        
         CheckForHits();
     }
 
     public float noteScrollTime = 2.0f;
+
+    void ScrollNotes()
+    {
+        foreach (Note note in activeNotes)
+        {
+            if (note != null && note.transform != null)
+            {
+                // Move notes down the screen at the speed of noteScrollSpeed
+                note.transform.position += Vector3.down * noteScrollSpeed * Time.deltaTime;
+            }
+        }
+    }
 
     void SpawnNote(NoteData note)
     {
@@ -114,7 +129,7 @@ public class NotesManager : MonoBehaviour
                     Destroy(note.gameObject);
                 }
             }
-            else if (note != null & note.transform != null && note.transform.position.y < -Screen.height)
+            else if (note != null && note.transform != null && note.transform.position.y < -Screen.height)
             {
                 activeNotes.RemoveAt(i);
                 Destroy(note.gameObject);
@@ -133,7 +148,7 @@ public class NotesManager : MonoBehaviour
             }
             else
             {
-                score += 300*combo;
+                score += 300 * combo;
             }
             combo++;
         }
@@ -146,7 +161,7 @@ public class NotesManager : MonoBehaviour
             }
             else
             {
-                score += 150*combo;
+                score += 150 * combo;
             }
             combo++;
         }
@@ -159,8 +174,8 @@ public class NotesManager : MonoBehaviour
             }
             else
             {
-                score += 50*combo;
-            }   
+                score += 50 * combo;
+            }
             combo++;
         }
         else
@@ -219,6 +234,7 @@ public class NotesManager : MonoBehaviour
             default: return null;
         }
     }
+
     GameObject GetEndPoint(int lane)
     {
         switch (lane)

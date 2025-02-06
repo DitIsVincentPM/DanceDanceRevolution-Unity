@@ -42,7 +42,6 @@ public class SongManager : MonoBehaviour
         instance = this;
         
         notesManager = FindObjectOfType<NotesManager>();
-        LoadSong(songName);
     }
 
     public void LoadSong(string songName)
@@ -58,7 +57,7 @@ public class SongManager : MonoBehaviour
         }
 
         // Load JSON Notes file
-        TextAsset noteJsonFile = Resources.Load<TextAsset>($"{songPath}Notes"+".json");
+        TextAsset noteJsonFile = Resources.Load<TextAsset>($"{songPath}Notes");
         if (noteJsonFile == null)
         {
             Debug.LogError($"Notes.json for {songName} not found in {songPath}");
@@ -95,7 +94,6 @@ public class SongManager : MonoBehaviour
         if (videoClip == null)
         {
             Debug.LogError($"Clip for {songName} not found in {songPath}");
-            return;
         }
         videoPlayer.clip = videoClip;
         videoPlayer.Play();
