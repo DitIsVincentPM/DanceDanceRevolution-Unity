@@ -44,7 +44,10 @@ public class Note : MonoBehaviour
     void Update()
     {
         if (notesManager.audioSource == null) return;
-        if (currentState == NoteState.Destroyed) return;
+        if (currentState == NoteState.Destroyed)
+        {
+            Destroy(gameObject);
+        }
 
         float songTime = notesManager.audioSource.time;
         float progress = Mathf.Clamp01((songTime - (noteHitTime - notesManager.noteScrollTime)) / notesManager.noteScrollTime);

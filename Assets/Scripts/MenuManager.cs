@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -9,18 +10,49 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         if(singleton == null) singleton = this; else if(singleton != this) Destroy(gameObject);
+        backgroundImage.sprite = backgroundSprite;
     }
     
     [SerializeField] private ConnectingScreen connectingScreen;
     [SerializeField] private GameObject connectingTypeScreen;
     [SerializeField] private AudioSource audioSource;
 
+    [SerializeField] private GameObject songSelectionScreen;
+    [SerializeField] private GameObject gameScreen;
+
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private Sprite backgroundSprite;
+
     public void ConnectionSuccessful()
     {
-        SongManager.instance.LoadSong("over the top");
         audioSource.enabled = true;
         audioSource.Play();
-        SongManager.instance.StartSong();
+        
+        OpenSongSelectionScreen();
+    }
+
+    public void OpenSongSelectionScreen()
+    {
+        currentScreen = "Song";
+        connectingScreen.gameObject.SetActive(false);
+        songSelectionScreen.SetActive(true);
+    }
+
+    public void SongLoaded()
+    {
+        currentScreen = "Game";
+        
+        connectingScreen.gameObject.SetActive(false);
+        songSelectionScreen.SetActive(false);
+        gameScreen.SetActive(true);
+        audioSource.Stop();
+        backgroundImage.sprite = null;
+    }
+
+    public void SongFinished()
+    {
+        audioSource.Play();
+        backgroundImage.sprite = backgroundSprite;
     }
     
     public void StartConnectingScreen()

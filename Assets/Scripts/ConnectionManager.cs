@@ -13,19 +13,21 @@ public class ConnectionManager : MonoBehaviour
 {
     public static ConnectionManager singleton;
     public ConnectionType connectionType = ConnectionType.SERIAL;
-    
+
     public string portName = "COM3";
     public int baudRate = 115200;
     private SerialPort serialPort;
     private Thread serialThread;
+    private Thread connectionThread;
     private bool isRunning = false;
 
     private ConcurrentQueue<string> serialQueue = new ConcurrentQueue<string>(); // Thread-safe queue
 
     void Start()
     {
-        if(singleton == null) singleton = this; else Destroy(this);
-            
+        if (singleton == null) singleton = this;
+        else Destroy(this);
+
         Debug.Log("Starting connection manager, waiting for user input...");
     }
 
@@ -33,9 +35,27 @@ public class ConnectionManager : MonoBehaviour
     {
         if (connectionType == ConnectionType.SERIAL)
         {
-            MenuManager.singleton.StartConnectingScreen();
-            
-            serialPort = new SerialPort(portName, baudRate);
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                MenuManager.singleton.StartConnectingScreen();
+            });
+            connectionThread = new Thread(AttemptSerialConnection);
+            connectionThread.Start();
+        }
+        else if (connectionType == ConnectionType.HOTSPOT)
+        {
+            // Handle hotspot connection logic here
+        }
+    }
+
+    private void AttemptSerialConnection()
+    {
+        string[] availablePorts = SerialPort.GetPortNames();
+        bool connectionSuccessful = false;
+
+        foreach (string port in availablePorts)
+        {
+            serialPort = new SerialPort(port, baudRate);
             serialPort.ReadTimeout = 1000;
 
             try
@@ -46,21 +66,55 @@ public class ConnectionManager : MonoBehaviour
                 serialThread = new Thread(ReadSerialData);
                 serialThread.Start();
 
-                Debug.Log("Serial port opened successfully!");
-                MenuManager.singleton.ConnectedScreen();
-                MenuManager.singleton.ConnectionSuccessful();
+                // Check if the port is sending the correct data format
+                if (CheckSerialDataFormat())
+                {
+                    Debug.Log($"Serial port {port} opened successfully!");
+                    UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                    {
+                        MenuManager.singleton.ConnectedScreen();
+                        MenuManager.singleton.ConnectionSuccessful();
+                    });
+                    connectionSuccessful = true;
+                    break;
+                }
+                else
+                {
+                    Debug.LogError($"Serial port {port} is not sending the correct data format.");
+                    HandleDisconnection();
+                }
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Error opening serial port: {e.Message}");
-                MenuManager.singleton.ConnectingFailedScreen();
-            }   
-        } 
-        else if (connectionType == ConnectionType.HOTSPOT)
-        {
-            // Handle hotspot connection logic here
+                Debug.LogError($"Error opening serial port {port}: {e.Message}");
+                serialPort.Close();
+            }
         }
-    } 
+
+        if (!connectionSuccessful)
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                MenuManager.singleton.ConnectingFailedScreen();
+            });
+        }
+    }
+
+    private bool CheckSerialDataFormat()
+    {
+        // Wait for a short period to receive data
+        Thread.Sleep(1000);
+
+        if (serialQueue.TryDequeue(out string data))
+        {
+            string[] buttonStates = data.Split(',');
+
+            // Check if the data format is correct
+            return buttonStates.Length == 4;
+        }
+
+        return false;
+    }
 
     private void ReadSerialData()
     {
@@ -71,7 +125,9 @@ public class ConnectionManager : MonoBehaviour
                 string data = serialPort.ReadLine();
                 serialQueue.Enqueue(data);
             }
-            catch (System.TimeoutException) { }
+            catch (System.TimeoutException)
+            {
+            }
             catch (System.IO.IOException)
             {
                 Debug.LogError("Serial port disconnected!");
@@ -98,7 +154,7 @@ public class ConnectionManager : MonoBehaviour
                 bool button2 = buttonStates[1] == "1";
                 bool button3 = buttonStates[2] == "1";
                 bool button4 = buttonStates[3] == "1";
-                
+
                 InputManager.singleton.UpdateInput(button1, button2, button3, button4);
             }
         }
@@ -117,8 +173,6 @@ public class ConnectionManager : MonoBehaviour
             serialPort.Close();
             serialPort = null;
         }
-        
-        MenuManager.singleton.ConnectingFailedScreen();
     }
 
     void OnApplicationQuit()

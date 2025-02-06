@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine.Video;
 
 [System.Serializable]
@@ -96,7 +97,6 @@ public class SongManager : MonoBehaviour
             Debug.LogError($"Clip for {songName} not found in {songPath}");
         }
         videoPlayer.clip = videoClip;
-        videoPlayer.Play();
         
         isReady = true; // Song is fully loaded and ready to start
     }
@@ -109,8 +109,12 @@ public class SongManager : MonoBehaviour
             return;
         }
 
+        MenuManager.singleton.SongLoaded();
+
         Debug.Log($"Starting song: {songName}");
         notesManager.InitializeNotes(notes, audioSource);
+        
+        videoPlayer.Play();
         audioSource.Play();
     }
 }

@@ -1,19 +1,22 @@
-using UnityEngine;
-using UnityEditor;
+using System;
 using System.IO;
+using System.IO.Compression;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 public class OsuImporterWindow : EditorWindow
 {
-    private string osuFileContent = "";
+    private string selectedOszPath = "";
+    private string extractPath = "";
+    private string osuFilePath = "";
+
     private string songTitle = "";
     private string artist = "";
     private float bpm = 120f;
-    private SongDifficulty difficulty = SongDifficulty.Beginner;
-
-    private string selectedAudioPath = "";
-    private string selectedCoverPath = "";
-    private string selectedVideoPath = "";
+    private string audioFilename = "";
+    private string coverFilename = "";
 
     [MenuItem("Tools/Osu Importer")]
     public static void ShowWindow()
@@ -24,119 +27,186 @@ public class OsuImporterWindow : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("Osu Mania Importer", EditorStyles.boldLabel);
-        
-        // Input field to paste .osu file content directly
-        osuFileContent = EditorGUILayout.TextArea(osuFileContent, GUILayout.Height(200));
-        
-        GUILayout.Space(10);
-        
-        if (GUILayout.Button("Select Song File (.mp3, .wav)"))
-        {
-            selectedAudioPath = EditorUtility.OpenFilePanel("Select Song File", "", "mp3,wav");
-        }
-        GUILayout.Label("Selected Audio: " + (string.IsNullOrEmpty(selectedAudioPath) ? "None" : Path.GetFileName(selectedAudioPath)));
 
-        if (GUILayout.Button("Select Cover Art (.png, .jpg)"))
+        if (GUILayout.Button("Select OSZ File"))
         {
-            selectedCoverPath = EditorUtility.OpenFilePanel("Select Cover Image", "", "png,jpg");
+            selectedOszPath = EditorUtility.OpenFilePanel("Select OSZ File", "", "osz");
         }
-        GUILayout.Label("Selected Cover: " + (string.IsNullOrEmpty(selectedCoverPath) ? "None" : Path.GetFileName(selectedCoverPath)));
-
-        if (GUILayout.Button("Select Video File (.mp4)"))
-        {
-            selectedVideoPath = EditorUtility.OpenFilePanel("Select Video File", "", "mp4");
-        }
-        GUILayout.Label("Selected Video: " + (string.IsNullOrEmpty(selectedVideoPath) ? "None" : Path.GetFileName(selectedVideoPath)));
+        GUILayout.Label("Selected OSZ: " + (string.IsNullOrEmpty(selectedOszPath) ? "None" : Path.GetFileName(selectedOszPath)));
 
         GUILayout.Space(10);
-        
-        if (GUILayout.Button("Import OSU File"))
+
+        if (GUILayout.Button("Import OSZ File"))
         {
-            if (!string.IsNullOrEmpty(osuFileContent))
+            if (!string.IsNullOrEmpty(selectedOszPath))
             {
-                ImportOsuFile();
+                ImportOszFile();
             }
             else
             {
-                Debug.LogError("No OSU content provided!");
+                Debug.LogError("No OSZ file selected!");
             }
         }
     }
 
-    private void ImportOsuFile()
+    private void ImportOszFile()
     {
-        if (string.IsNullOrEmpty(osuFileContent)) return;
+        extractPath = Path.Combine(Application.persistentDataPath, "ExtractedOsz");
+        
+        // Ensure directory is clean
+        if (Directory.Exists(extractPath))
+            Directory.Delete(extractPath, true);
+        Directory.CreateDirectory(extractPath);
 
-        // Extract song title and artist from the .osu content
-        songTitle = ExtractSongTitle(osuFileContent);
-        artist = ExtractArtist(osuFileContent);
+        // Rename .osz to .zip and extract
+        string zipFilePath = selectedOszPath + ".zip";
+        File.Copy(selectedOszPath, zipFilePath, true);
+        ZipFile.ExtractToDirectory(zipFilePath, extractPath);
+        File.Delete(zipFilePath); // Cleanup
 
+        Debug.Log("Extracted OSZ to: " + extractPath);
+
+        // Find .osu file
+        string[] osuFiles = Directory.GetFiles(extractPath, "*.osu");
+        if (osuFiles.Length == 0)
+        {
+            Debug.LogError("No .osu file found!");
+            return;
+        }
+        osuFilePath = osuFiles[0]; // Assuming first .osu is the main file
+        Debug.Log("Using OSU file: " + osuFilePath);
+
+        // Parse .osu file
+        string osuContent = File.ReadAllText(osuFilePath);
+        songTitle = ExtractMetadata(osuContent, "Title:");
+        artist = ExtractMetadata(osuContent, "Artist:");
+        bpm = float.TryParse(ExtractMetadata(osuContent, "BPM:"), out float parsedBpm) ? parsedBpm : 120f;
+        audioFilename = ExtractMetadata(osuContent, "AudioFilename:");
+
+        // Extract cover image from [Events] section
+        coverFilename = ExtractCoverImage(osuContent);
+
+        Debug.Log($"Extracted Metadata: Title - {songTitle}, Artist - {artist}, BPM - {bpm}, Audio - {audioFilename}, Cover - {coverFilename}");
+
+        // Find assets (song and cover)
+        string audioPath = Path.Combine(extractPath, audioFilename);
+        string coverPath = !string.IsNullOrEmpty(coverFilename) ? Path.Combine(extractPath, coverFilename) : "";
+
+        // Save to Unity project
+        SaveToProject(audioPath, coverPath);
+    }
+
+    private string ExtractMetadata(string content, string key)
+    {
+        string[] lines = content.Split('\n');
+        foreach (string line in lines)
+        {
+            if (line.StartsWith(key))
+            {
+                return line.Split(':')[1].Trim();
+            }
+        }
+        return "";
+    }
+
+    private string ExtractCoverImage(string content)
+    {
+        string[] lines = content.Split('\n');
+        bool isEventSection = false;
+
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("[Events]"))
+            {
+                isEventSection = true;
+                continue;
+            }
+
+            if (isEventSection && line.Contains("\""))
+            {
+                int start = line.IndexOf("\"") + 1;
+                int end = line.LastIndexOf("\"");
+                return line.Substring(start, end - start);
+            }
+        }
+
+        return "";
+    }
+
+    private void SaveToProject(string audioPath, string coverPath)
+    {
         string songFolder = $"Assets/Resources/Songs/{songTitle}";
         if (!AssetDatabase.IsValidFolder(songFolder))
         {
             AssetDatabase.CreateFolder("Assets/Resources/Songs", songTitle);
         }
 
+        // Copy and import assets
+        string audioTargetPath = CopyAndImportAsset(audioPath, songFolder, "Song");
+        string coverTargetPath = CopyAndImportAsset(coverPath, songFolder, "Cover");
+
+        // Check for video clip
+        string videoPath = Directory.GetFiles(extractPath, "*.mp4").First();
+        if (!string.IsNullOrEmpty(videoPath))
+        {
+            string videoTargetPath = $"{songFolder}/Clip.mp4";
+            File.Copy(videoPath, videoTargetPath, true);
+            AssetDatabase.ImportAsset(videoTargetPath);
+        }
+
+        // Convert .osu to JSON note data
         string jsonFilePath = $"{songFolder}/Notes.json";
-        List<OsuNote> notes = ConvertOsuToNotes(osuFileContent);
-        string jsonData = JsonUtility.ToJson(new OsuNoteList { notes = notes }, true);
-        File.WriteAllText(jsonFilePath, jsonData);
+        List<OsuNote> notes = ConvertOsuToNotes(File.ReadAllText(osuFilePath));
+        File.WriteAllText(jsonFilePath, JsonUtility.ToJson(new OsuNoteList { notes = notes }, true));
 
-        // Handle Audio File
-        if (!string.IsNullOrEmpty(selectedAudioPath))
-        {
-            string audioFileName = "Song" + Path.GetExtension(selectedAudioPath); // Rename to "Song"
-            string audioDestPath = $"{songFolder}/{audioFileName}";
-            File.Copy(selectedAudioPath, audioDestPath, true);
-            AssetDatabase.ImportAsset(audioDestPath);
-        }
-
-        // Handle Cover Art
-        if (!string.IsNullOrEmpty(selectedCoverPath))
-        {
-            string coverFileName = "Cover" + Path.GetExtension(selectedCoverPath); // Rename to "Cover"
-            string coverDestPath = $"{songFolder}/{coverFileName}";
-            File.Copy(selectedCoverPath, coverDestPath, true);
-            AssetDatabase.ImportAsset(coverDestPath);
-        }
-
-        // Handle Video File
-        if (!string.IsNullOrEmpty(selectedVideoPath))
-        {
-            string videoFileName = "Clip" + Path.GetExtension(selectedVideoPath); // Rename to "Video"
-            string videoDestPath = $"{songFolder}/{videoFileName}";
-            File.Copy(selectedVideoPath, videoDestPath, true);
-            AssetDatabase.ImportAsset(videoDestPath);
-        }
-
-        // Create Song ScriptableObject
+        // Create ScriptableObject for the song
         Song songAsset = ScriptableObject.CreateInstance<Song>();
         songAsset.songTitle = songTitle;
         songAsset.artist = artist;
         songAsset.bpm = bpm;
-        songAsset.songDifficulty = difficulty;
+        songAsset.songClip = AssetDatabase.LoadAssetAtPath<AudioClip>(audioTargetPath);
+        songAsset.songImage = AssetDatabase.LoadAssetAtPath<Sprite>(LoadSpriteFromPath(coverTargetPath)); // Use the LoadSpriteFromPath method
 
-        // Assign AudioClip
-        if (!string.IsNullOrEmpty(selectedAudioPath))
-        {
-            string audioFileName = "Song" + Path.GetExtension(selectedAudioPath);
-            songAsset.songClip = AssetDatabase.LoadAssetAtPath<AudioClip>($"{songFolder}/{audioFileName}");
-        }
-
-        // Assign Cover Image
-        if (!string.IsNullOrEmpty(selectedCoverPath))
-        {
-            string coverFileName = "Cover" + Path.GetExtension(selectedCoverPath);
-            songAsset.songImage = AssetDatabase.LoadAssetAtPath<Sprite>($"{songFolder}/{coverFileName}");
-        }
-
-        // Create the asset for the song
         string assetPath = $"{songFolder}/Data.asset";
         AssetDatabase.CreateAsset(songAsset, assetPath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log($"Song '{songTitle}' imported successfully.");
+        Debug.Log($"Successfully imported: {songTitle}");
+    }
+
+    private string CopyAndImportAsset(string sourcePath, string targetFolder, string newName)
+    {
+        if (!string.IsNullOrEmpty(sourcePath) && File.Exists(sourcePath))
+        {
+            string extension = Path.GetExtension(sourcePath);
+            string targetPath = $"{targetFolder}/{newName}{extension}";
+            File.Copy(sourcePath, targetPath, true);
+            AssetDatabase.ImportAsset(targetPath);
+            return targetPath;
+        }
+        return "";
+    }
+
+    private string LoadSpriteFromPath(string path)
+    {
+        if (string.IsNullOrEmpty(path) || !File.Exists(path)) return null;
+
+        Texture2D texture = new Texture2D(2, 2);
+        byte[] imageData = File.ReadAllBytes(path);
+        texture.LoadImage(imageData);
+
+        // Set the texture import settings to Sprite (2D and UI) and Single mode
+        string assetPath = path.Replace(Application.dataPath, "Assets");
+        TextureImporter textureImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+        if (textureImporter != null)
+        {
+            textureImporter.textureType = TextureImporterType.Sprite;
+            textureImporter.spriteImportMode = SpriteImportMode.Single;
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+        }
+
+        return path;
     }
 
     private List<OsuNote> ConvertOsuToNotes(string osuText)
@@ -151,88 +221,28 @@ public class OsuImporterWindow : EditorWindow
         {
             if (line.StartsWith("Mode:"))
             {
-                string modeValue = line.Split(':')[1].Trim();
-                isMania = modeValue == "3";
-                Debug.Log("Game mode detected: " + (isMania ? "Mania" : "Other") + " (Raw mode value: " + modeValue + ")");
+                isMania = line.Contains("3");
             }
             else if (isMania && line.StartsWith("[HitObjects]"))
             {
                 readingHitObjects = true;
-                Debug.Log("[HitObjects] section found. Starting parsing.");
                 continue;
             }
             else if (readingHitObjects && line.Contains(","))
             {
-                Debug.Log("Parsing hit object: " + line);
-                ParseHitObject(line, notes, columnCount);
+                string[] parts = line.Split(',');
+                int x = int.Parse(parts[0]);
+                float time = int.Parse(parts[2]) / 1000f;
+                int lane = (x * columnCount) / 512;
+                notes.Add(new OsuNote { time = time, lane = lane, type = "normal" });
             }
         }
-
         return notes;
     }
 
-    private void ParseHitObject(string line, List<OsuNote> notes, int columnCount)
-    {
-        string[] parts = line.Split(',');
-        int x = int.Parse(parts[0]);
-        float time = int.Parse(parts[2]) / 1000f;
-        int type = int.Parse(parts[3]);
-        bool isHold = (type & 128) != 0;
-
-        int lane = (x * columnCount) / 512;
-        Debug.Log("Converted X: " + x + " to lane: " + lane);
-
-        if (isHold && parts.Length > 5)
-        {
-            int endTime = int.Parse(parts[5].Split(':')[0]);
-            float holdDuration = (endTime - int.Parse(parts[2])) / 1000f;
-            Debug.Log("Hold note detected at lane: " + lane + " with duration: " + holdDuration);
-            notes.Add(new OsuNote { time = time, lane = lane, type = "hold", holdDuration = holdDuration });
-        }
-        else
-        {
-            Debug.Log("Normal note detected at lane: " + lane);
-            notes.Add(new OsuNote { time = time, lane = lane, type = "normal" });
-        }
-    }
-
-    private string ExtractSongTitle(string osuText)
-    {
-        string titleLine = GetLineWithPrefix(osuText, "Title:");
-        return titleLine?.Split(':')[1].Trim() ?? "Unknown Title";
-    }
-
-    private string ExtractArtist(string osuText)
-    {
-        string artistLine = GetLineWithPrefix(osuText, "Artist:");
-        return artistLine?.Split(':')[1].Trim() ?? "Unknown Artist";
-    }
-
-    private string GetLineWithPrefix(string osuText, string prefix)
-    {
-        string[] lines = osuText.Split('\n');
-        foreach (string line in lines)
-        {
-            if (line.StartsWith(prefix))
-            {
-                return line;
-            }
-        }
-        return null;
-    }
-
     [System.Serializable]
-    class OsuNote
-    {
-        public float time;
-        public int lane;
-        public string type;
-        public float holdDuration;
-    }
-
+    class OsuNote { public float time; public int lane; public string type; }
+    
     [System.Serializable]
-    class OsuNoteList
-    {
-        public List<OsuNote> notes;
-    }
+    class OsuNoteList { public List<OsuNote> notes; }
 }

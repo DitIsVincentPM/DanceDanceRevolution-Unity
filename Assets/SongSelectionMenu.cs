@@ -29,6 +29,14 @@ public class SongSelectionMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow)) ChangeSelection(-1);
         if (Input.GetKeyDown(KeyCode.DownArrow)) ChangeSelection(1);
+        if (Input.GetKeyDown(KeyCode.Return)) StartSelectedSong();
+    }
+
+    void StartSelectedSong()
+    {
+        Song selectedSong = songs[selectedIndex];
+        SongManager.instance.LoadSong(selectedSong.songTitle);
+        SongManager.instance.StartSong();
     }
 
     void LoadSongsFromResources()
@@ -63,6 +71,7 @@ public class SongSelectionMenu : MonoBehaviour
         {
             GameObject songItem = Instantiate(songItemPrefab, songListContainer);
             songItem.GetComponentInChildren<TMP_Text>().text = song.songTitle;
+            songItem.transform.GetChild(1).GetComponent<Image>().sprite  = song.songImage;
             songItems.Add(songItem);
         }
     }

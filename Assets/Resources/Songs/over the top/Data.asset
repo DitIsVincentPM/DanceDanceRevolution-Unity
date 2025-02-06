@@ -15,6 +15,6 @@ MonoBehaviour:
   songTitle: over the top
   artist: xi
   songClip: {fileID: 8300000, guid: cecbf49731d159c4fa3c9505fa73fc8e, type: 3}
-  songImage: {fileID: 0}
+  songImage: {fileID: 21300000, guid: 2ec29ee339ee8fd40b04669e22cb5ed0, type: 3}
   bpm: 120
   songDifficulty: 0
