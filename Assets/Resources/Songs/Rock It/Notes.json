@@ -1,0 +1,1969 @@
+{
+    "notes": [
+        {
+            "time": 0.7400000095367432,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 0.7400000095367432,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 1.0920000076293946,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 1.4450000524520875,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 1.7979999780654908,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 2.1510000228881838,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 2.503999948501587,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 2.8570001125335695,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 3.2100000381469728,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 3.562999963760376,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 3.562999963760376,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 3.9159998893737795,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 4.269000053405762,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 4.622000217437744,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 4.974999904632568,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 5.328000068664551,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 5.681000232696533,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 6.033999919891357,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 6.38700008392334,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 6.38700008392334,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 6.738999843597412,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 7.0920000076293949,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 7.445000171661377,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 7.797999858856201,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 8.151000022888184,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 8.503999710083008,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 8.857000350952149,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 9.210000038146973,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 9.210000038146973,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 9.562999725341797,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 9.916000366210938,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 10.269000053405762,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 10.621999740600586,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 10.975000381469727,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 11.32800006866455,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 11.680999755859375,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 12.034000396728516,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 12.034000396728516,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 12.38700008392334,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 12.73900032043457,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 13.092000007629395,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 13.444999694824219,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 13.79800033569336,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 14.151000022888184,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 14.503999710083008,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 14.857000350952149,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 15.210000038146973,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 15.562999725341797,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 15.916000366210938,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 16.268999099731447,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 16.621999740600587,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 16.975000381469728,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 17.150999069213868,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 17.327999114990236,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 17.680999755859376,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 17.94499969482422,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 18.209999084472658,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 18.475000381469728,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 18.73900032043457,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 19.091999053955079,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 19.35700035095215,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 19.621999740600587,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 19.886999130249025,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 20.150999069213868,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 20.503999710083009,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 20.768999099731447,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 21.034000396728517,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 21.29800033569336,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 21.562999725341798,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 21.916000366210939,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 22.180999755859376,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 22.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 22.621999740600587,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 23.327999114990236,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 23.327999114990236,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 23.680999755859376,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 24.034000396728517,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 24.386999130249025,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 24.73900032043457,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 24.73900032043457,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 25.091999053955079,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 25.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 25.79800033569336,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 26.150999069213868,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 26.150999069213868,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 26.503999710083009,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 26.85700035095215,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 27.209999084472658,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 27.562999725341798,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 27.562999725341798,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 27.916000366210939,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 28.268999099731447,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 28.621999740600587,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 28.975000381469728,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 28.975000381469728,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 29.327999114990236,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 29.680999755859376,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 30.034000396728517,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 30.386999130249025,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 30.386999130249025,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 30.73900032043457,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 31.091999053955079,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 31.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 31.79800033569336,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 31.79800033569336,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 32.1510009765625,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 32.50400161743164,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 32.856998443603519,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 33.209999084472659,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 33.209999084472659,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 33.5629997253418,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 33.91600036621094,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 34.09199905395508,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 34.62200164794922,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 34.79800033569336,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 35.1510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 35.50400161743164,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 35.856998443603519,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 36.209999084472659,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 36.5629997253418,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 36.91600036621094,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 37.26900100708008,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 37.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 37.974998474121097,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 38.327999114990237,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 38.680999755859378,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 39.034000396728519,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 39.387001037597659,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 39.73899841308594,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 39.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 40.26900100708008,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 40.534000396728519,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 40.79800033569336,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 41.0629997253418,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 41.327999114990237,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 41.680999755859378,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 41.94499969482422,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 42.209999084472659,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 42.474998474121097,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 42.73899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 43.09199905395508,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 43.356998443603519,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 43.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 43.887001037597659,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 44.1510009765625,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 44.327999114990237,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 44.50400161743164,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 45.209999084472659,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 45.5629997253418,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 45.91600036621094,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 46.26900100708008,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 46.62200164794922,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 46.974998474121097,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 47.327999114990237,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 47.680999755859378,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 48.034000396728519,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 48.387001037597659,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 48.73899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 49.09199905395508,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 49.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 49.79800033569336,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 50.1510009765625,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 50.50400161743164,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 50.856998443603519,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 51.209999084472659,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 51.5629997253418,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 51.827999114990237,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 52.09199905395508,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 52.356998443603519,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 52.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 52.974998474121097,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 53.23899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 53.50400161743164,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 53.76900100708008,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 54.034000396728519,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 54.387001037597659,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 54.6510009765625,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 54.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 55.180999755859378,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 55.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 55.62200164794922,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 55.79800033569336,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 56.1510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 56.50400161743164,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 56.856998443603519,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 57.209999084472659,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 57.209999084472659,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 57.5629997253418,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 57.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 58.09199905395508,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 58.26900100708008,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 58.62200164794922,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 58.974998474121097,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 59.327999114990237,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 59.50400161743164,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 59.680999755859378,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 60.034000396728519,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 60.387001037597659,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 60.73899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 60.91600036621094,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 61.09199905395508,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 61.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 61.79800033569336,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 62.1510009765625,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 62.327999114990237,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 62.50400161743164,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 62.856998443603519,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 63.209999084472659,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 63.5629997253418,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 63.73899841308594,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 63.91600036621094,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 64.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 64.62200164794922,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 64.9749984741211,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 65.1510009765625,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 65.3280029296875,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 65.68099975585938,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 66.03399658203125,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 66.38700103759766,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 66.56300354003906,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 66.73899841308594,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 67.09200286865235,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 67.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 67.7979965209961,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 67.9749984741211,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 68.1510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 68.50399780273438,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 68.50399780273438,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 68.85700225830078,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 69.20999908447266,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 69.38700103759766,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 69.56300354003906,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 69.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 70.26899719238281,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 70.62200164794922,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 70.7979965209961,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 70.9749984741211,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 71.3280029296875,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 71.3280029296875,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 71.68099975585938,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 72.03399658203125,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 72.20999908447266,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 72.38700103759766,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 72.73899841308594,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 73.09200286865235,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 73.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 73.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 73.7979965209961,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 74.1510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 74.1510009765625,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 74.50399780273438,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 74.85700225830078,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 75.03399658203125,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 75.20999908447266,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 75.56300354003906,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 75.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 76.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 76.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 76.62200164794922,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 76.9749984741211,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 76.9749984741211,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 77.3280029296875,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 77.68099975585938,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 77.85700225830078,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 78.03399658203125,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 78.38700103759766,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 78.73899841308594,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 79.09200286865235,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 79.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 79.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 79.7979965209961,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 80.1510009765625,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 80.50399780273438,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 80.85700225830078,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 81.20999908447266,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 81.56300354003906,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 81.91600036621094,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 82.26899719238281,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 82.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 82.9749984741211,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 83.3280029296875,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 83.68099975585938,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 84.03399658203125,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 84.38700103759766,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 84.73899841308594,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 84.91600036621094,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 85.09200286865235,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 85.44499969482422,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 85.70999908447266,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 85.9749984741211,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 86.23899841308594,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 86.50399780273438,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 86.85700225830078,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 87.12200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 87.38700103759766,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 87.6510009765625,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 87.91600036621094,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 88.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 88.53399658203125,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 88.7979965209961,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 89.06300354003906,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 89.3280029296875,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 89.68099975585938,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 89.94499969482422,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 90.20999908447266,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 90.38700103759766,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 91.09200286865235,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 91.09200286865235,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 91.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 91.7979965209961,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 92.1510009765625,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 92.50399780273438,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 92.50399780273438,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 92.85700225830078,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 93.20999908447266,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 93.56300354003906,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 93.91600036621094,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 93.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 94.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 94.62200164794922,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 94.9749984741211,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 95.3280029296875,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 95.3280029296875,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 95.68099975585938,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 96.03399658203125,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 96.38700103759766,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 96.73899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 96.73899841308594,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 97.09200286865235,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 97.44499969482422,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 97.7979965209961,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 98.1510009765625,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 98.1510009765625,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 98.50399780273438,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 98.85700225830078,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 99.20999908447266,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 99.56300354003906,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 99.56300354003906,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 99.91600036621094,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 100.26899719238281,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 100.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 100.9749984741211,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 100.9749984741211,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 101.3280029296875,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 101.68099975585938,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 101.85700225830078,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 102.38700103759766,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 102.56300354003906,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 102.91600036621094,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 103.26899719238281,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 103.62200164794922,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 103.9749984741211,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 104.3280029296875,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 104.68099975585938,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 105.03399658203125,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 105.38700103759766,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 105.73899841308594,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 106.09200286865235,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 106.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 106.7979965209961,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 107.1510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 107.50399780273438,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 107.68099975585938,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 108.03399658203125,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 108.2979965209961,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 108.56300354003906,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 108.8280029296875,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 109.09200286865235,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 109.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 109.70999908447266,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 109.9749984741211,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 110.23899841308594,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 110.50399780273438,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 110.85700225830078,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 111.12200164794922,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 111.38700103759766,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 111.6510009765625,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 111.91600036621094,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 112.09200286865235,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 112.26899719238281,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 112.44499969482422,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 112.62200164794922,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 112.7979965209961,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 112.9749984741211,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 113.3280029296875,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 113.68099975585938,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 114.03399658203125,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 114.38700103759766,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 114.73899841308594,
+            "lane": 2,
+            "type": "normal"
+        },
+        {
+            "time": 115.09200286865235,
+            "lane": 3,
+            "type": "normal"
+        },
+        {
+            "time": 115.44499969482422,
+            "lane": 1,
+            "type": "normal"
+        },
+        {
+            "time": 115.7979965209961,
+            "lane": 0,
+            "type": "normal"
+        },
+        {
+            "time": 115.7979965209961,
+            "lane": 3,
+            "type": "normal"
+        }
+    ]
+}
