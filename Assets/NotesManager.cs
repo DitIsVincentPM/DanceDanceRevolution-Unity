@@ -4,7 +4,8 @@ using TMPro;
 
 public class NotesManager : MonoBehaviour
 {
-    public float noteScrollSpeed = 5f;  // Scroll speed multiplier
+    public float noteScrollSpeed = 5f;  // Base scroll speed multiplier
+    public float scrollSpeedMultiplier = 1f;  // Additional multiplier for faster songs
     public RectTransform notesParentCanvas;
 
     public Transform hitPositionLeft;
@@ -20,6 +21,8 @@ public class NotesManager : MonoBehaviour
 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text comboText;
+    [SerializeField] private Animator scoreTextAnimator;
+    [SerializeField] private Animator comboTextAnimator;
 
     private int score = 0;
     private int combo = 0;
@@ -40,6 +43,12 @@ public class NotesManager : MonoBehaviour
     {
         if (audioSource == null || !audioSource.isPlaying) return;
 
+        // Check for F6 key press to reset the song
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            ResetSong();
+        }
+
         float songTime = audioSource.time;
 
         // Spawn notes exactly "noteScrollTime" before they should be hit
@@ -51,11 +60,11 @@ public class NotesManager : MonoBehaviour
 
         // Scroll notes down based on scroll speed
         ScrollNotes();
-        
+
         CheckForHits();
     }
 
-    public float noteScrollTime = 2.0f;
+    public float noteScrollTime = 0f;
 
     void ScrollNotes()
     {
@@ -63,8 +72,8 @@ public class NotesManager : MonoBehaviour
         {
             if (note != null && note.transform != null)
             {
-                // Move notes down the screen at the speed of noteScrollSpeed
-                note.transform.position += Vector3.down * noteScrollSpeed * Time.deltaTime;
+                // Move notes down the screen at the speed of noteScrollSpeed and scrollSpeedMultiplier
+                note.transform.position += Vector3.down * noteScrollSpeed * scrollSpeedMultiplier * Time.deltaTime;
             }
         }
     }
@@ -141,46 +150,40 @@ public class NotesManager : MonoBehaviour
     {
         if (accuracy < 10f)
         {
-            Debug.Log("Perfect! +300");
-            if (combo == 0)
-            {
-                score += 300;
-            }
-            else
-            {
-                score += 300 * combo;
-            }
+            scoreText.text = "PERFECT!";
+            scoreTextAnimator.SetInteger("score", 4);
+            score += combo == 0 ? 300 : 300 * combo;
             combo++;
         }
         else if (accuracy < 20f)
         {
-            Debug.Log("Good! +150");
-            if (combo == 0)
-            {
-                score += 150;
-            }
-            else
-            {
-                score += 150 * combo;
-            }
+            scoreText.text = "GREAT!";
+            scoreTextAnimator.SetInteger("score", 3);
+            score += combo == 0 ? 150 : 150 * combo;
             combo++;
         }
         else if (accuracy < 30f)
         {
-            Debug.Log("Okay! +50");
-            if (combo == 0)
-            {
-                score += 50;
-            }
-            else
-            {
-                score += 50 * combo;
-            }
+            scoreText.text = "OK";
+            scoreTextAnimator.SetInteger("score", 2);
+            score += combo == 0 ? 50 : 50 * combo;
             combo++;
         }
         else
         {
             RegisterMiss(note);
+            return;
+        }
+
+        scoreTextAnimator.SetTrigger("NewHit");
+
+        if (combo == 2)
+        {
+            comboTextAnimator.SetTrigger("NewCombo");
+        }
+        else if (combo > 2)
+        {
+            comboTextAnimator.SetTrigger("NumberUp");
         }
 
         UpdateUI();
@@ -188,15 +191,17 @@ public class NotesManager : MonoBehaviour
 
     public void RegisterMiss(Note note)
     {
-        Debug.Log("Missed note! Combo Break!!");
+        scoreText.text = "MISS";
+        scoreTextAnimator.SetInteger("score", 1);
+        scoreTextAnimator.SetTrigger("NewHit");
         combo = 0;
+        comboTextAnimator.SetTrigger("ComboLost");
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        scoreText.text = $"Score: {score}";
-        comboText.text = $"Combo: x{combo}";
+        comboText.text = combo > 1 ? combo.ToString() : "";
     }
 
     GameObject GetNotePrefab(int lane)
@@ -245,5 +250,24 @@ public class NotesManager : MonoBehaviour
             case 3: return ArrowSpawner.instance.endRightArrow.gameObject;
             default: return null;
         }
+    }
+
+    void ResetSong()
+    {
+        // Stop the audio
+        audioSource.Stop();
+
+        // Clear active notes
+        foreach (Note note in activeNotes)
+        {
+            Destroy(note.gameObject);
+        }
+        activeNotes.Clear();
+
+        // Reset song time and notes
+        nextNoteIndex = 0;
+        songStartTime = Time.time;
+        audioSource.Play();
+        Debug.Log("Song reset.");
     }
 }

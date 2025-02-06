@@ -26,6 +26,8 @@ public class DDRButton : MonoBehaviour
 
     public void SelectButton()
     {
+        if(buttonImage == null) return;
+        
         buttonImage.color = highlightColor;
         SoundEffectManager.Instance.PlaySelectSound();
     }

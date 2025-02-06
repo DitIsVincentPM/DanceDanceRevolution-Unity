@@ -10,7 +10,7 @@ public class Note : MonoBehaviour
     private float noteHitTime;
     private bool canBeHit = false;
     private bool isHit = false;
-    
+
     public enum NoteState
     {
         Moving,
@@ -81,7 +81,7 @@ public class Note : MonoBehaviour
         if (currentState == NoteState.Hit)
         {
             isHit = true;
-            
+
             missTime += Time.deltaTime;
             if (missTime > 0.5f) // Small delay before destroying hit notes
             {

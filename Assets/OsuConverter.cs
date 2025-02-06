@@ -146,7 +146,7 @@ public class OsuImporterWindow : EditorWindow
         string coverTargetPath = CopyAndImportAsset(coverPath, songFolder, "Cover");
 
         // Check for video clip
-        string videoPath = Directory.GetFiles(extractPath, "*.mp4").First();
+        string videoPath = Directory.GetFiles(extractPath, "*.mp4").FirstOrDefault();
         if (!string.IsNullOrEmpty(videoPath))
         {
             string videoTargetPath = $"{songFolder}/Clip.mp4";

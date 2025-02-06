@@ -13,10 +13,15 @@ public class SongSelectionMenu : MonoBehaviour
     public TMP_Text bpmText;
     public Image songArtwork;
     public VideoPlayer videoPlayer; // Video player for background videos
+    public ScrollRect scrollRect; // Reference to the ScrollRect component
 
     private List<Song> songs = new List<Song>();
     private List<GameObject> songItems = new List<GameObject>();
     private int selectedIndex = 0;
+
+    private bool wasUpPressed = false;
+    private bool wasDownPressed = false;
+    private bool wasSelectPressed = false;
 
     void Start()
     {
@@ -27,9 +32,17 @@ public class SongSelectionMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) ChangeSelection(-1);
-        if (Input.GetKeyDown(KeyCode.DownArrow)) ChangeSelection(1);
-        if (Input.GetKeyDown(KeyCode.Return)) StartSelectedSong();
+        bool upPressed = InputManager.singleton._left;
+        bool downPressed = InputManager.singleton._right;
+        bool selectPressed = InputManager.singleton._up;
+
+        if (upPressed && !wasUpPressed) ChangeSelection(-1);
+        if (downPressed && !wasDownPressed) ChangeSelection(1);
+        if (selectPressed && !wasSelectPressed) StartSelectedSong();
+
+        wasUpPressed = upPressed;
+        wasDownPressed = downPressed;
+        wasSelectPressed = selectPressed;
     }
 
     void StartSelectedSong()
@@ -80,6 +93,7 @@ public class SongSelectionMenu : MonoBehaviour
     {
         selectedIndex = Mathf.Clamp(selectedIndex + direction, 0, songs.Count - 1);
         UpdateSelection();
+        ScrollToSelected();
     }
 
     void UpdateSelection()
@@ -105,5 +119,15 @@ public class SongSelectionMenu : MonoBehaviour
         {
             videoPlayer.Stop();
         }
+    }
+
+    void ScrollToSelected()
+    {
+        float itemHeight = songItems[0].GetComponent<RectTransform>().rect.height;
+        float containerHeight = songListContainer.GetComponent<RectTransform>().rect.height;
+        float contentHeight = songItems.Count * itemHeight;
+
+        float scrollPosition = Mathf.Clamp01((selectedIndex * itemHeight - containerHeight / 2) / (contentHeight - containerHeight));
+        scrollRect.verticalNormalizedPosition = 1 - scrollPosition;
     }
 }
