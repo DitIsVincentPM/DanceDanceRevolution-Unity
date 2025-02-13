@@ -5,6 +5,8 @@ public class SoundEffectManager : MonoBehaviour
     public static SoundEffectManager Instance;
     private AudioSource audioSource;
     public AudioClip audioSelectClip;
+    public AudioClip ddrMenuLineClip;
+    public AudioClip choseAOptionLineClip;
 
     void Awake()
     {

@@ -8,7 +8,7 @@ public class DebugMenu : MonoBehaviour
     [SerializeField] private GameObject content;    // Parent container for debug texts
 
     private Dictionary<string, DebugEntry> debugEntries = new Dictionary<string, DebugEntry>();
-    private bool isDebugVisible = true; // Track visibility state
+    private bool isDebugVisible = false; // Track visibility state
 
     void Update()
     {

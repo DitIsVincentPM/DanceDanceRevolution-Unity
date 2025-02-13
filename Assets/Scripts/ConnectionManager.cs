@@ -32,8 +32,6 @@ public class ConnectionManager : MonoBehaviour
         else Destroy(this);
 
         lastPort = PlayerPrefs.GetString("LastSuccessfulPort", null);
-
-        Debug.Log("Starting connection manager, waiting for user input...");
     }
 
     private void AttemptSerialConnection()
