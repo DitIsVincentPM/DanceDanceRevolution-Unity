@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
 using System.Collections.Concurrent;
-
+using System.Linq;
 
 public enum ConnectionType
 {
@@ -131,13 +131,27 @@ public class ConnectionManager : MonoBehaviour
     {
         // Wait for a short period to receive data
         Thread.Sleep(600);
+        Debug.Log("Waiting to receive data...");
 
         if (serialQueue.TryDequeue(out string data))
         {
+            Debug.Log($"Data received: {data}");
             string[] buttonStates = data.Split(',');
 
-            // Check if the data format is correct
-            return buttonStates.Length == 4;
+            // Check if the data format is correct and contains only 0 or 1
+            if (buttonStates.Length == 4 && buttonStates.All(state => state == "0" || state == "1"))
+            {
+                Debug.Log("Data format is correct.");
+                return true;
+            }
+            else
+            {
+                Debug.LogError("Data format is incorrect.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No data received.");
         }
 
         return false;

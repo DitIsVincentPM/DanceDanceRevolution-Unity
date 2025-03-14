@@ -18,10 +18,9 @@ public class SongSelectionMenu : MonoBehaviour
     private List<Song> songs = new List<Song>();
     private List<GameObject> songItems = new List<GameObject>();
     private int selectedIndex = 0;
-
-    private bool wasUpPressed = false;
-    private bool wasDownPressed = false;
-    private bool wasSelectPressed = false;
+    
+    public float inputCooldown = 0.2f; // Cooldown duration in seconds
+    private float lastInputTime = 0f;
 
     void Start()
     {
@@ -30,19 +29,45 @@ public class SongSelectionMenu : MonoBehaviour
         UpdateSelection();
     }
 
+    private bool wasUpPressed = false;
+    private bool wasDownPressed = false;
+    private bool wasSelectPressed = false;
+
     void Update()
     {
         bool upPressed = InputManager.singleton._left;
         bool downPressed = InputManager.singleton._right;
         bool selectPressed = InputManager.singleton._up;
 
-        if (upPressed && !wasUpPressed) ChangeSelection(-1);
-        if (downPressed && !wasDownPressed) ChangeSelection(1);
-        if (selectPressed && !wasSelectPressed) StartSelectedSong();
+        if (upPressed && !wasUpPressed)
+        {
+            ChangeSelection(-1);
+            wasUpPressed = true;
+        }
+        else if (!upPressed)
+        {
+            wasUpPressed = false;
+        }
 
-        wasUpPressed = upPressed;
-        wasDownPressed = downPressed;
-        wasSelectPressed = selectPressed;
+        if (downPressed && !wasDownPressed)
+        {
+            ChangeSelection(1);
+            wasDownPressed = true;
+        }
+        else if (!downPressed)
+        {
+            wasDownPressed = false;
+        }
+
+        if (selectPressed && !wasSelectPressed)
+        {
+            StartSelectedSong();
+            wasSelectPressed = true;
+        }
+        else if (!selectPressed)
+        {
+            wasSelectPressed = false;
+        }
     }
 
     void StartSelectedSong()
@@ -83,9 +108,7 @@ public class SongSelectionMenu : MonoBehaviour
         foreach (Song song in songs)
         {
             GameObject songItem = Instantiate(songItemPrefab, songListContainer);
-            songItem.GetComponentInChildren<TMP_Text>().text = song.songTitle;
-            songItem.transform.GetChild(1).GetComponent<Image>().sprite  = song.songImage;
-            songItems.Add(songItem);
+            songItem.GetComponent<SongItem>().Initialize(song);
         }
     }
 
@@ -100,7 +123,7 @@ public class SongSelectionMenu : MonoBehaviour
     {
         for (int i = 0; i < songItems.Count; i++)
         {
-            songItems[i].GetComponentInChildren<TMP_Text>().color = (i == selectedIndex) ? Color.yellow : Color.white;
+            if(i == selectedIndex) songItems[i].GetComponent<SongItem>().Select(); else songItems[i].GetComponent<SongItem>().Deselect();
         }
 
         Song selectedSong = songs[selectedIndex];

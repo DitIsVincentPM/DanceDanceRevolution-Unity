@@ -89,6 +89,14 @@ using UnityEngine;
             menuAnimator.SetTrigger("Connection");
             StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.choseAOptionLineClip, 1.0f));
         }
+
+        public void SelectSong()
+        {
+            ChangeState(GameState.SongSelection);
+            MenuManager.singleton.currentScreen = "Game";
+            menuAnimator.SetTrigger("SelectSong");
+            StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.choseAOptionLineClip, 1.0f));
+        }
     
         public void StartConnecting()
         {

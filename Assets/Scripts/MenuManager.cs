@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager singleton;
 
-    private string currentScreen = "Type";
+    public string currentScreen = "Type";
 
     void Start()
     {
@@ -22,13 +23,14 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite backgroundSprite;
+    
+    [ShowInInspector] Animator menuAnimator;
 
     public void ConnectionSuccessful()
     {
         audioSource.enabled = true;
         audioSource.Play();
-        
-        OpenSongSelectionScreen();
+        GameManager.singleton.SelectSong();
     }
 
     public void OpenSongSelectionScreen()
@@ -41,7 +43,8 @@ public class MenuManager : MonoBehaviour
     public void SongLoaded()
     {
         currentScreen = "Game";
-        
+        menuAnimator.SetTrigger("NoAnimation");
+
         connectingScreen.gameObject.SetActive(false);
         songSelectionScreen.SetActive(false);
         gameScreen.SetActive(true);
@@ -51,6 +54,8 @@ public class MenuManager : MonoBehaviour
 
     public void SongFinished()
     {
+        menuAnimator.SetTrigger("NoAnimation");
+
         audioSource.Play();
         backgroundImage.sprite = backgroundSprite;
     }
