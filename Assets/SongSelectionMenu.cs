@@ -8,7 +8,7 @@ public class SongSelectionMenu : MonoBehaviour
     [SerializeField] private GameObject songItemPrefab;
     [SerializeField] private Transform songListContent;
     [SerializeField] private ScrollRect scrollRect;
-    
+
     // Configuration for selection scale and scrolling
     [SerializeField] private float selectedItemScale = 1.05f;
     [SerializeField] private float scrollPaddingFactor = 0.15f;
@@ -28,36 +28,28 @@ public class SongSelectionMenu : MonoBehaviour
     void OnEnable()
     {
         isActive = true;
-        SubscribeToInputEvents();
     }
 
     void OnDisable()
     {
         isActive = false;
-        UnsubscribeFromInputEvents();
     }
 
-    private void SubscribeToInputEvents()
+    void Update()
     {
-        if (InputManager.singleton != null)
+        if (!isActive) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            InputManager.singleton.OnLeftPressed += OnNavigateUp;
-            InputManager.singleton.OnRightPressed += OnNavigateDown;
-            InputManager.singleton.OnUpPressed += OnSelect;
-            
-            Debug.Log("SongSelectionMenu: Subscribed to input events");
+            OnNavigateUp();
         }
-    }
-
-    private void UnsubscribeFromInputEvents()
-    {
-        if (InputManager.singleton != null)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            InputManager.singleton.OnLeftPressed -= OnNavigateUp;
-            InputManager.singleton.OnRightPressed -= OnNavigateDown;
-            InputManager.singleton.OnUpPressed -= OnSelect;
-            
-            Debug.Log("SongSelectionMenu: Unsubscribed from input events");
+            OnNavigateDown();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            OnSelect();
         }
     }
 
@@ -113,13 +105,11 @@ public class SongSelectionMenu : MonoBehaviour
             {
                 if (i == selectedIndex)
                 {
-                    item.Select();
-                    songItems[i].transform.localScale = Vector3.one * selectedItemScale;
+                    item.transform.localScale = Vector3.one * selectedItemScale;
                 }
                 else
                 {
-                    item.Deselect();
-                    songItems[i].transform.localScale = Vector3.one;
+                    item.transform.localScale = Vector3.one;
                 }
             }
         }
@@ -127,24 +117,20 @@ public class SongSelectionMenu : MonoBehaviour
 
     private void OnNavigateUp()
     {
-        if (!isActive) return;
-        
         ChangeSelection(-1);
         SoundEffectManager.Instance.PlaySelectSound();
     }
 
     private void OnNavigateDown()
     {
-        if (!isActive) return;
-        
         ChangeSelection(1);
         SoundEffectManager.Instance.PlaySelectSound();
     }
 
     private void OnSelect()
     {
-        if (!isActive) return;
-        
+        // Ensure the game object is active before starting the coroutine
+        gameObject.SetActive(true);
         StartSelectedSong();
     }
 
@@ -169,23 +155,23 @@ public class SongSelectionMenu : MonoBehaviour
             float itemHeight = (songItems[0].transform as RectTransform).rect.height;
             float viewportHeight = scrollRect.viewport.rect.height;
             float contentHeight = (songListContent as RectTransform).rect.height;
-            
+
             // Get the actual position of the selected item
             float itemPosition = (songItems[selectedIndex].transform as RectTransform).anchoredPosition.y;
-            
+
             // Calculate normalized position (0-1)
             float normalizedPosition = 1f - (itemPosition / (contentHeight - viewportHeight));
-            
+
             // Add padding to center the item better
             float centeringOffset = (itemHeight * 0.5f) / contentHeight;
             normalizedPosition += centeringOffset;
-            
+
             // Add additional fine-tuning padding
-            normalizedPosition += scrollPaddingFactor * (selectedIndex - songs.Count/2) / songs.Count;
-            
+            normalizedPosition += scrollPaddingFactor * (selectedIndex - songs.Count / 2) / songs.Count;
+
             // Ensure it stays within valid range
             normalizedPosition = Mathf.Clamp01(normalizedPosition);
-            
+
             // Smooth scroll to position
             StartCoroutine(SmoothScrollToPosition(normalizedPosition));
         }
@@ -219,17 +205,27 @@ public class SongSelectionMenu : MonoBehaviour
             // Play sound effect
             SoundEffectManager.Instance.PlaySound(SoundEffectManager.Instance.audioSelectClip, 1.0f);
 
-            try {
-                // Unsubscribe from events before changing states to prevent input handling during transition
-                UnsubscribeFromInputEvents();
-                
+            try
+            {
                 // Change the game state
                 GameManager.singleton.StartGame();
-            
+
+                // Deactivate the song selection screen
+                gameObject.SetActive(false);
+
                 // Small delay before loading the song
-                StartCoroutine(LoadSongWithDelay(selectedSong.songTitle, 0.1f));
+                if (SongManager.instance != null)
+                {
+                    SongManager.instance.songName = selectedSong.songTitle;
+                    SongManager.instance.LoadSong(selectedSong.songTitle);
+                }
+                else
+                {
+                    Debug.LogError("SongManager instance is null!");
+                }
             }
-            catch (System.Exception e) {
+            catch (System.Exception e)
+            {
                 Debug.LogError($"Error starting song: {e.Message}");
             }
         }
@@ -238,7 +234,7 @@ public class SongSelectionMenu : MonoBehaviour
     private System.Collections.IEnumerator LoadSongWithDelay(string songTitle, float delay)
     {
         yield return new WaitForSeconds(delay);
-    
+
         if (SongManager.instance != null)
         {
             SongManager.instance.songName = songTitle;

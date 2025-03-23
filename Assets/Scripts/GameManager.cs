@@ -1,130 +1,112 @@
 using UnityEngine;
-    using UnityEngine.InputSystem;
-    using System.Collections;
-    
-    public class GameManager : MonoBehaviour
+using UnityEngine.InputSystem;
+using System.Collections;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager singleton;
+
+    public enum GameState
     {
-        public static GameManager singleton;
-    
-        public enum GameState
+        Intro,
+        SongSelection,
+        Game,
+        Results
+    }
+
+    public GameState currentState;
+
+    [SerializeField] private GameObject songSelectionScreen;
+    [SerializeField] private GameObject gameScreen;
+    [SerializeField] private GameObject resultsScreen;
+
+    [SerializeField] private Animator menuAnimator;
+
+    void Start()
+    {
+        if (singleton == null)
         {
-            Intro,
-            ChoseConnection,
-            Connecting,
-            MainMenu,
-            PlayStyle,
-            SongSelection,
-            Game,
-            Results
+            singleton = this;
+            DontDestroyOnLoad(gameObject);
         }
-    
-        public GameState currentState;
-    
-        [SerializeField] private GameObject mainMenuScreen;
-        [SerializeField] private GameObject connectingScreen;
-        [SerializeField] private GameObject songSelectionScreen;
-        [SerializeField] private GameObject gameScreen;
-        [SerializeField] private GameObject resultsScreen;
-    
-        [SerializeField] private Animator menuAnimator;
-    
-        void Start()
+        else
         {
-            if (singleton == null)
+            Destroy(gameObject);
+        }
+
+        Intro();
+    }
+
+    public void ChangeState(GameState newState)
+    {
+        currentState = newState;
+        UpdateUI();
+
+        if (newState == GameState.SongSelection)
+        {
+            SelectSong();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        songSelectionScreen.SetActive(currentState == GameState.SongSelection);
+        gameScreen.SetActive(currentState == GameState.Game);
+    }
+
+    void Update()
+    {
+        if (currentState == GameState.Intro)
+        {
+            if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
-                singleton = this; 
+                ChangeState(GameState.SongSelection);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentState == GameState.SongSelection)
+            {
+                Application.Quit();
             }
             else
             {
-                Destroy(gameObject);
+                ReturnToSongSelection();
             }
-    
-            Intro();
-        }
-    
-        public void ChangeState(GameState newState)
-        {
-            currentState = newState;
-            UpdateUI();
-        }
-    
-        private void UpdateUI()
-        {
-    
-        }
-    
-        void Update()
-        {
-            if (currentState == GameState.Intro)
-            {
-                if (Keyboard.current.anyKey.wasPressedThisFrame)
-                {
-                    ChoseConnection();
-                }
-            }
-    
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (currentState == GameState.MainMenu)
-                {
-                    Application.Quit();
-                }
-                else
-                {
-                    ReturnToMainMenu();
-                }
-            }
-        }
-    
-        void Intro()
-        {
-            ChangeState(GameState.Intro);
-            StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.ddrMenuLineClip, 1.0f));
-        }
-    
-        void ChoseConnection()
-        {
-            ChangeState(GameState.ChoseConnection);
-            menuAnimator.SetTrigger("Connection");
-            StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.choseAOptionLineClip, 1.0f));
-        }
-
-        public void SelectSong()
-        {
-            ChangeState(GameState.SongSelection);
-            MenuManager.singleton.currentScreen = "Game";
-            menuAnimator.SetTrigger("SelectSong");
-            StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.choseAOptionLineClip, 1.0f));
-        }
-    
-        public void StartConnecting()
-        {
-            ChangeState(GameState.Connecting);
-        }
-    
-        public void ConnectionSuccessful()
-        {
-            ChangeState(GameState.SongSelection);
-        }
-    
-        public void StartGame()
-        {
-            ChangeState(GameState.Game);
-        }
-    
-        public void EndGame()
-        {
-            ChangeState(GameState.Results);
-        }
-    
-        public void ReturnToMainMenu()
-        {
-            ChangeState(GameState.MainMenu);
-        }
-    
-        private IEnumerator PlaySoundWithDelay(AudioClip clip, float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            SoundEffectManager.Instance.PlaySound(clip);
         }
     }
+
+    void Intro()
+    {
+        ChangeState(GameState.Intro);
+        StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.ddrMenuLineClip, 1.0f));
+    }
+
+    public void SelectSong()
+    {
+        menuAnimator.SetTrigger("SelectSong");
+        StartCoroutine(PlaySoundWithDelay(SoundEffectManager.Instance.choseAOptionLineClip, 1.0f));
+    }
+
+    public void StartGame()
+    {
+        ChangeState(GameState.Game);
+    }
+
+    public void EndGame()
+    {
+        ChangeState(GameState.Results);
+    }
+
+    public void ReturnToSongSelection()
+    {
+        ChangeState(GameState.SongSelection);
+    }
+
+    private IEnumerator PlaySoundWithDelay(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SoundEffectManager.Instance.PlaySound(clip);
+    }
+}
