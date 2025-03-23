@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite backgroundSprite;
     
-    [ShowInInspector] Animator menuAnimator;
+    [ShowInInspector] public Animator menuAnimator;
 
     public void ConnectionSuccessful()
     {

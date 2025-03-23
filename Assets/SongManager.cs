@@ -96,9 +96,13 @@ public class SongManager : MonoBehaviour
         {
             Debug.LogError($"Clip for {songName} not found in {songPath}");
         }
-        videoPlayer.clip = videoClip;
+        else
+        {
+            videoPlayer.clip = videoClip;
+        }
         
         isReady = true; // Song is fully loaded and ready to start
+        StartSong();
     }
 
     public void StartSong()

@@ -37,11 +37,21 @@ public class ConnectionManager : MonoBehaviour
     private void AttemptSerialConnection()
     {
         string[] availablePorts = SerialPort.GetPortNames();
+        Debug.Log("Available COM ports: " + string.Join(", ", availablePorts));
+    
+        if (availablePorts.Length == 0)
+        {
+            Debug.LogError("No COM ports found!");
+            UnityMainThreadDispatcher.Instance().Enqueue(() => { MenuManager.singleton.ConnectingFailedScreen(); });
+            return;
+        }
+
         bool connectionSuccessful = false;
 
         // Try the last successful port first
         if (!string.IsNullOrEmpty(lastPort) && System.Array.Exists(availablePorts, port => port == lastPort))
         {
+            Debug.Log("Trying last successful port: " + lastPort);
             if (TryOpenPort(lastPort))
             {
                 connectionSuccessful = true;
@@ -55,6 +65,7 @@ public class ConnectionManager : MonoBehaviour
             {
                 if (port == lastPort) continue; // Skip the last port if already tried
 
+                Debug.Log("Trying port: " + port);
                 if (TryOpenPort(port))
                 {
                     connectionSuccessful = true;
@@ -65,6 +76,7 @@ public class ConnectionManager : MonoBehaviour
 
         if (!connectionSuccessful)
         {
+            Debug.LogError("Failed to connect to any available port");
             UnityMainThreadDispatcher.Instance().Enqueue(() => { MenuManager.singleton.ConnectingFailedScreen(); });
         }
     }
@@ -83,121 +95,218 @@ public class ConnectionManager : MonoBehaviour
         }
     }
 
-    private bool TryOpenPort(string port)
+   private bool TryOpenPort(string port)
+{
+    try
     {
-        serialPort = new SerialPort(port, baudRate);
-        serialPort.ReadTimeout = 600;
-
-        try
+        // Close any existing connection first
+        if (serialPort != null && serialPort.IsOpen)
         {
-            serialPort.Open();
-            isRunning = true;
-
-            serialThread = new Thread(ReadSerialData);
-            serialThread.Start();
-
-            // Check if the port is sending the correct data format
-            if (CheckSerialDataFormat())
-            {
-                Debug.Log($"Serial port {port} opened successfully!");
-                UnityMainThreadDispatcher.Instance().Enqueue(() =>
-                {
-                    MenuManager.singleton.ConnectedScreen();
-                    MenuManager.singleton.ConnectionSuccessful();
-
-                    // Save the successful port
-                    PlayerPrefs.SetString("LastSuccessfulPort", port);
-                    PlayerPrefs.Save();
-                });
-
-                return true;
-            }
-            else
-            {
-                Debug.LogError($"Serial port {port} is not sending the correct data format.");
-                HandleDisconnection();
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Error opening serial port {port}: {e.Message}");
             serialPort.Close();
         }
-
-        return false;
-    }
-
-    private bool CheckSerialDataFormat()
-    {
-        // Wait for a short period to receive data
-        Thread.Sleep(600);
-        Debug.Log("Waiting to receive data...");
-
-        if (serialQueue.TryDequeue(out string data))
+        
+        // Clear the queue before starting a new connection
+        while (serialQueue.TryDequeue(out _)) { }
+        
+        serialPort = new SerialPort(port, baudRate);
+        serialPort.ReadTimeout = 1000; // Increase timeout
+        serialPort.WriteTimeout = 1000;
+        serialPort.DtrEnable = true; // Try enabling DTR - helps with some Arduino boards
+        
+        Debug.Log($"Attempting to open port {port} at {baudRate} baud");
+        serialPort.Open();
+        
+        // Give the port a moment to stabilize
+        Thread.Sleep(500);
+        
+        if (!serialPort.IsOpen)
         {
-            Debug.Log($"Data received: {data}");
-            string[] buttonStates = data.Split(',');
-
-            // Check if the data format is correct and contains only 0 or 1
-            if (buttonStates.Length == 4 && buttonStates.All(state => state == "0" || state == "1"))
+            Debug.LogError($"Port {port} did not open successfully");
+            return false;
+        }
+        
+        isRunning = true;
+        serialThread = new Thread(ReadSerialData);
+        serialThread.Start();
+        
+        // Check if the port is sending the correct data format
+        if (CheckSerialDataFormat())
+        {
+            Debug.Log($"Serial port {port} opened successfully!");
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
-                Debug.Log("Data format is correct.");
-                return true;
-            }
-            else
-            {
-                Debug.LogError("Data format is incorrect.");
-            }
+                MenuManager.singleton.ConnectedScreen();
+                MenuManager.singleton.ConnectionSuccessful();
+                
+                // Save the successful port
+                PlayerPrefs.SetString("LastSuccessfulPort", port);
+                PlayerPrefs.Save();
+            });
+            
+            return true;
         }
         else
         {
-            Debug.LogError("No data received.");
+            Debug.LogError($"Serial port {port} is not sending the correct data format.");
+            HandleDisconnection();
         }
+    }
+    catch (System.Exception e)
+    {
+        Debug.LogError($"Error opening serial port {port}: {e.Message}");
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
+    }
+    
+    return false;
+}
+   
+private bool PingSerialPort()
+{
+    if (serialPort == null || !serialPort.IsOpen)
+        return false;
+        
+    try 
+    {
+        // Send a simple character to prompt a response
+        serialPort.Write("P");
+        
+        // Wait shortly for a reply
+        Thread.Sleep(200);
+        
+        // Check if any data came back
+        return serialQueue.Count > 0;
+    }
+    catch (System.Exception e)
+    {
+        Debug.LogError($"Error pinging serial port: {e.Message}");
+        return false;
+    }
+}
 
+    private bool CheckSerialDataFormat()
+    {
+        // Wait longer and check multiple times for data
+        for (int i = 0; i < 5; i++) 
+        {
+            Thread.Sleep(200);
+            Debug.Log($"Check attempt {i+1}/5, Queue count: {serialQueue.Count}");
+        
+            if (serialQueue.Count > 0 && serialQueue.TryDequeue(out string data))
+            {
+                Debug.Log($"Data received: {data}");
+                string[] buttonStates = data.Split(',');
+            
+                // Check if the data format is correct and contains only 0 or 1
+                if (buttonStates.Length == 4 && buttonStates.All(state => state == "0" || state == "1"))
+                {
+                    Debug.Log("Data format is correct.");
+                    return true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Data format is incorrect: '{data}' (length: {buttonStates.Length})");
+                    // Continue trying - don't return false yet
+                }
+            }
+        }
+    
+        Debug.LogError("No valid data received after multiple attempts.");
         return false;
     }
 
     private void ReadSerialData()
     {
+        int errorCount = 0;
+        const int MAX_ERRORS = 5;
+    
         while (isRunning && serialPort != null && serialPort.IsOpen)
         {
             try
             {
                 string data = serialPort.ReadLine();
-                serialQueue.Enqueue(data);
+                if (!string.IsNullOrEmpty(data))
+                {
+                    serialQueue.Enqueue(data);
+                    errorCount = 0; // Reset error count on successful read
+                }
             }
             catch (System.TimeoutException)
             {
+                // Timeout is normal, just continue
             }
-            catch (System.IO.IOException)
+            catch (System.IO.IOException e)
             {
-                Debug.LogError("Serial port disconnected!");
-                HandleDisconnection();
-                break;
+                Debug.LogError($"Serial port IO exception: {e.Message}");
+                errorCount++;
+                if (errorCount >= MAX_ERRORS)
+                {
+                    Debug.LogError("Too many serial errors, disconnecting");
+                    HandleDisconnection();
+                    break;
+                }
             }
             catch (System.Exception e)
             {
                 Debug.LogError($"Serial read error: {e.Message}");
-                break;
+                errorCount++;
+                if (errorCount >= MAX_ERRORS)
+                {
+                    Debug.LogError("Too many serial errors, disconnecting");
+                    HandleDisconnection();
+                    break;
+                }
             }
+        
+            // Short sleep to prevent CPU overuse
+            Thread.Sleep(1);
         }
     }
 
     void Update()
     {
-        if (serialQueue.TryDequeue(out string data)) // Process data on the main thread
+        try
         {
-            string[] buttonStates = data.Split(',');
-
-            if (buttonStates.Length == 4)
+            // Check if we have data in the queue
+            if (serialQueue != null && serialQueue.Count > 0)
             {
-                bool button1 = buttonStates[0] == "1";
-                bool button2 = buttonStates[1] == "1";
-                bool button3 = buttonStates[2] == "1";
-                bool button4 = buttonStates[3] == "1";
+                if (serialQueue.TryDequeue(out string data))
+                {
+                    if (string.IsNullOrEmpty(data))
+                    {
+                        return; // Skip empty data
+                    }
+                
+                    string[] buttonStates = data.Split(',');
 
-                InputManager.singleton.UpdateInput(button1, button2, button3, button4);
+                    if (buttonStates.Length == 4)
+                    {
+                        bool button1 = buttonStates[0] == "1";
+                        bool button2 = buttonStates[1] == "1";
+                        bool button3 = buttonStates[2] == "1";
+                        bool button4 = buttonStates[3] == "1";
+
+                        if (InputManager.singleton != null)
+                        {
+                            InputManager.singleton.UpdateInput(button1, button2, button3, button4);
+                        }
+                        else
+                        {
+                            Debug.LogError("InputManager singleton is null");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Received malformed data: {data} with {buttonStates.Length} elements");
+                    }
+                }
             }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error in Update: {e.Message}\n{e.StackTrace}");
         }
     }
 

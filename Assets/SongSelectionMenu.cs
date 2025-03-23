@@ -1,26 +1,22 @@
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Video;
+using System.Collections.Generic;
+using System.IO;
 
 public class SongSelectionMenu : MonoBehaviour
 {
-    public Transform songListContainer;
-    public GameObject songItemPrefab;
-    public TMP_Text songTitleText;
-    public TMP_Text bpmText;
-    public Image songArtwork;
-    public VideoPlayer videoPlayer; // Video player for background videos
-    public ScrollRect scrollRect; // Reference to the ScrollRect component
+    [SerializeField] private GameObject songItemPrefab;
+    [SerializeField] private Transform songListContent;
+    [SerializeField] private ScrollRect scrollRect;
+    
+    // Configuration for selection scale and scrolling
+    [SerializeField] private float selectedItemScale = 1.05f;
+    [SerializeField] private float scrollPaddingFactor = 0.15f;
 
     private List<Song> songs = new List<Song>();
     private List<GameObject> songItems = new List<GameObject>();
     private int selectedIndex = 0;
-    
-    public float inputCooldown = 0.2f; // Cooldown duration in seconds
-    private float lastInputTime = 0f;
+    private bool isActive = false;
 
     void Start()
     {
@@ -29,128 +25,228 @@ public class SongSelectionMenu : MonoBehaviour
         UpdateSelection();
     }
 
-    private bool wasUpPressed = false;
-    private bool wasDownPressed = false;
-    private bool wasSelectPressed = false;
-
-    void Update()
+    void OnEnable()
     {
-        bool upPressed = InputManager.singleton._left;
-        bool downPressed = InputManager.singleton._right;
-        bool selectPressed = InputManager.singleton._up;
+        isActive = true;
+        SubscribeToInputEvents();
+    }
 
-        if (upPressed && !wasUpPressed)
-        {
-            ChangeSelection(-1);
-            wasUpPressed = true;
-        }
-        else if (!upPressed)
-        {
-            wasUpPressed = false;
-        }
+    void OnDisable()
+    {
+        isActive = false;
+        UnsubscribeFromInputEvents();
+    }
 
-        if (downPressed && !wasDownPressed)
+    private void SubscribeToInputEvents()
+    {
+        if (InputManager.singleton != null)
         {
-            ChangeSelection(1);
-            wasDownPressed = true;
-        }
-        else if (!downPressed)
-        {
-            wasDownPressed = false;
-        }
-
-        if (selectPressed && !wasSelectPressed)
-        {
-            StartSelectedSong();
-            wasSelectPressed = true;
-        }
-        else if (!selectPressed)
-        {
-            wasSelectPressed = false;
+            InputManager.singleton.OnLeftPressed += OnNavigateUp;
+            InputManager.singleton.OnRightPressed += OnNavigateDown;
+            InputManager.singleton.OnUpPressed += OnSelect;
+            
+            Debug.Log("SongSelectionMenu: Subscribed to input events");
         }
     }
 
-    void StartSelectedSong()
+    private void UnsubscribeFromInputEvents()
     {
-        Song selectedSong = songs[selectedIndex];
-        SongManager.instance.LoadSong(selectedSong.songTitle);
-        SongManager.instance.StartSong();
+        if (InputManager.singleton != null)
+        {
+            InputManager.singleton.OnLeftPressed -= OnNavigateUp;
+            InputManager.singleton.OnRightPressed -= OnNavigateDown;
+            InputManager.singleton.OnUpPressed -= OnSelect;
+            
+            Debug.Log("SongSelectionMenu: Unsubscribed from input events");
+        }
     }
 
-    void LoadSongsFromResources()
+    private void LoadSongsFromResources()
     {
         songs.Clear();
-        string[] songFolders = Directory.GetDirectories(Path.Combine(Application.dataPath, "Resources/Songs"));
 
-        foreach (string folder in songFolders)
+        // Load all Song scriptable objects from the Resources/Songs folder
+        Song[] loadedSongs = Resources.LoadAll<Song>("Songs");
+
+        foreach (Song song in loadedSongs)
         {
-            string folderName = new DirectoryInfo(folder).Name;
-            string resourcePath = "Songs/" + folderName; // Path relative to Resources/
-
-            Song songData = Resources.Load<Song>(resourcePath + "/Data");
-
-            if (songData != null)
+            // Make sure we have only one instance of each song
+            if (!songs.Contains(song))
             {
-                songData.songImage = Resources.Load<Sprite>(resourcePath + "/Cover");
-                songs.Add(songData);
+                songs.Add(song);
+                Debug.Log($"Loaded song: {song.songTitle}");
             }
         }
     }
 
-    void PopulateSongList()
+    private void PopulateSongList()
     {
-        foreach (Transform child in songListContainer)
+        // Clear existing items
+        foreach (GameObject item in songItems)
         {
-            Destroy(child.gameObject);
+            Destroy(item);
         }
         songItems.Clear();
 
+        // Create new items
         foreach (Song song in songs)
         {
-            GameObject songItem = Instantiate(songItemPrefab, songListContainer);
-            songItem.GetComponent<SongItem>().Initialize(song);
+            GameObject itemObj = Instantiate(songItemPrefab, songListContent);
+            SongItem item = itemObj.GetComponent<SongItem>();
+
+            if (item != null)
+            {
+                item.Initialize(song);
+            }
+
+            songItems.Add(itemObj);
         }
     }
 
-    void ChangeSelection(int direction)
+    private void UpdateSelection()
     {
-        selectedIndex = Mathf.Clamp(selectedIndex + direction, 0, songs.Count - 1);
-        UpdateSelection();
-        ScrollToSelected();
-    }
-
-    void UpdateSelection()
-    {
+        // Update visual selection for all items
         for (int i = 0; i < songItems.Count; i++)
         {
-            if(i == selectedIndex) songItems[i].GetComponent<SongItem>().Select(); else songItems[i].GetComponent<SongItem>().Deselect();
+            SongItem item = songItems[i].GetComponent<SongItem>();
+            if (item != null)
+            {
+                if (i == selectedIndex)
+                {
+                    item.Select();
+                    songItems[i].transform.localScale = Vector3.one * selectedItemScale;
+                }
+                else
+                {
+                    item.Deselect();
+                    songItems[i].transform.localScale = Vector3.one;
+                }
+            }
+        }
+    }
+
+    private void OnNavigateUp()
+    {
+        if (!isActive) return;
+        
+        ChangeSelection(-1);
+        SoundEffectManager.Instance.PlaySelectSound();
+    }
+
+    private void OnNavigateDown()
+    {
+        if (!isActive) return;
+        
+        ChangeSelection(1);
+        SoundEffectManager.Instance.PlaySelectSound();
+    }
+
+    private void OnSelect()
+    {
+        if (!isActive) return;
+        
+        StartSelectedSong();
+    }
+
+    private void ChangeSelection(int direction)
+    {
+        int previousIndex = selectedIndex;
+        selectedIndex = Mathf.Clamp(selectedIndex + direction, 0, songs.Count - 1);
+
+        // Only update and scroll if the selection actually changed
+        if (previousIndex != selectedIndex)
+        {
+            UpdateSelection();
+            ScrollToSelected();
+        }
+    }
+
+    private void ScrollToSelected()
+    {
+        if (scrollRect != null && songItems.Count > 0 && selectedIndex >= 0 && selectedIndex < songItems.Count)
+        {
+            // Calculate position based on selected index
+            float itemHeight = (songItems[0].transform as RectTransform).rect.height;
+            float viewportHeight = scrollRect.viewport.rect.height;
+            float contentHeight = (songListContent as RectTransform).rect.height;
+            
+            // Get the actual position of the selected item
+            float itemPosition = (songItems[selectedIndex].transform as RectTransform).anchoredPosition.y;
+            
+            // Calculate normalized position (0-1)
+            float normalizedPosition = 1f - (itemPosition / (contentHeight - viewportHeight));
+            
+            // Add padding to center the item better
+            float centeringOffset = (itemHeight * 0.5f) / contentHeight;
+            normalizedPosition += centeringOffset;
+            
+            // Add additional fine-tuning padding
+            normalizedPosition += scrollPaddingFactor * (selectedIndex - songs.Count/2) / songs.Count;
+            
+            // Ensure it stays within valid range
+            normalizedPosition = Mathf.Clamp01(normalizedPosition);
+            
+            // Smooth scroll to position
+            StartCoroutine(SmoothScrollToPosition(normalizedPosition));
+        }
+    }
+
+    private System.Collections.IEnumerator SmoothScrollToPosition(float targetPosition)
+    {
+        float duration = 0.3f;
+        float elapsedTime = 0f;
+        float startPosition = scrollRect.verticalNormalizedPosition;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+            scrollRect.verticalNormalizedPosition = Mathf.Lerp(startPosition, targetPosition, smoothT);
+            yield return null;
         }
 
-        Song selectedSong = songs[selectedIndex];
-        songTitleText.text = selectedSong.songTitle;
-        bpmText.text = "BPM: " + selectedSong.bpm;
-        songArtwork.sprite = selectedSong.songImage;
+        scrollRect.verticalNormalizedPosition = targetPosition;
+    }
 
-        string videoPath = Path.Combine(Application.streamingAssetsPath, "Songs", selectedSong.name, "Video.mp4");
-
-        if (File.Exists(videoPath))
+    private void StartSelectedSong()
+    {
+        if (songs.Count > 0 && selectedIndex >= 0 && selectedIndex < songs.Count)
         {
-            videoPlayer.url = "file://" + videoPath;
-            videoPlayer.Play();
+            Song selectedSong = songs[selectedIndex];
+            Debug.Log($"Starting song: {selectedSong.songTitle}");
+
+            // Play sound effect
+            SoundEffectManager.Instance.PlaySound(SoundEffectManager.Instance.audioSelectClip, 1.0f);
+
+            try {
+                // Unsubscribe from events before changing states to prevent input handling during transition
+                UnsubscribeFromInputEvents();
+                
+                // Change the game state
+                GameManager.singleton.StartGame();
+            
+                // Small delay before loading the song
+                StartCoroutine(LoadSongWithDelay(selectedSong.songTitle, 0.1f));
+            }
+            catch (System.Exception e) {
+                Debug.LogError($"Error starting song: {e.Message}");
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator LoadSongWithDelay(string songTitle, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+    
+        if (SongManager.instance != null)
+        {
+            SongManager.instance.songName = songTitle;
+            SongManager.instance.LoadSong(songTitle);
         }
         else
         {
-            videoPlayer.Stop();
+            Debug.LogError("SongManager instance is null!");
         }
-    }
-
-    void ScrollToSelected()
-    {
-        float itemHeight = songItems[0].GetComponent<RectTransform>().rect.height;
-        float containerHeight = songListContainer.GetComponent<RectTransform>().rect.height;
-        float contentHeight = songItems.Count * itemHeight;
-
-        float scrollPosition = Mathf.Clamp01((selectedIndex * itemHeight - containerHeight / 2) / (contentHeight - containerHeight));
-        scrollRect.verticalNormalizedPosition = 1 - scrollPosition;
     }
 }

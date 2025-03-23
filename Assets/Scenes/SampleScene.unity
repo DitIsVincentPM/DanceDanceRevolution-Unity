@@ -1357,6 +1357,7 @@ MonoBehaviour:
   gameScreen: {fileID: 1687911258}
   backgroundImage: {fileID: 2128529730}
   backgroundSprite: {fileID: 21300000, guid: beee5660f1f43644bb0ad5d7b3fe6fc7, type: 3}
+  menuAnimator: {fileID: 1385234988}
 --- !u!4 &417881174
 Transform:
   m_ObjectHideFlags: 0
@@ -1399,10 +1400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5439ba7ab2ba9f242961f8e9e13b9032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _up: 0
-  _down: 0
-  _left: 0
-  _right: 0
 --- !u!114 &417881177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,18 +1450,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noteScrollSpeed: 5
-  scrollSpeedMultiplier: 1
+  scrollSpeedMultiplier: 10
   notesParentCanvas: {fileID: 1385234987}
   hitPositionLeft: {fileID: 611710494}
   hitPositionDown: {fileID: 233702231}
   hitPositionUp: {fileID: 1317902728}
   hitPositionRight: {fileID: 221960415}
   audioSource: {fileID: 0}
+  noteScrollTime: 1
   scoreText: {fileID: 1904758554}
   comboText: {fileID: 1947549948}
   scoreTextAnimator: {fileID: 1904758556}
   comboTextAnimator: {fileID: 981120926}
-  noteScrollTime: 2
+  perfectHitThreshold: 0.05
+  greatHitThreshold: 0.1
+  goodHitThreshold: 0.15
+  okHitThreshold: 0.2
 --- !u!114 &417881180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3609,14 +3610,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966d0e6a9c5a91646a87f8df5bb698c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songListContainer: {fileID: 689008751}
   songItemPrefab: {fileID: 8327895314128111174, guid: 12099850f95707943b93ee5788aecae0, type: 3}
-  songTitleText: {fileID: 10385798}
-  bpmText: {fileID: 1927327137}
-  songArtwork: {fileID: 866446231}
-  videoPlayer: {fileID: 2128529732}
+  songListContent: {fileID: 689008751}
   scrollRect: {fileID: 1241043018}
-  inputCooldown: 0.2
+  selectedItemScale: 1.05
+  scrollPaddingFactor: 0.15
 --- !u!1 &1800367942
 GameObject:
   m_ObjectHideFlags: 0

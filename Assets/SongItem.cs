@@ -7,6 +7,9 @@ public class SongItem : MonoBehaviour
     public Image image;
     public TMP_Text songName;
     public TMP_Text songDifficulty;
+    
+    private Color defaultColor = Color.white;
+    private Color selectedColor = Color.yellow;
 
     public void Initialize(Song song)
     {
@@ -17,11 +20,15 @@ public class SongItem : MonoBehaviour
 
     public void Select()
     {
-        this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        // Don't change scale here - it's handled by SongSelectionMenu
+        if (image != null)
+            image.color = selectedColor;
     }
 
     public void Deselect()
     {
-        this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        // Don't change scale here - it's handled by SongSelectionMenu
+        if (image != null)
+            image.color = defaultColor;
     }
 }

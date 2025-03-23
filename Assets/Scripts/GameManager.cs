@@ -32,8 +32,7 @@ using UnityEngine;
         {
             if (singleton == null)
             {
-                singleton = this;
-                DontDestroyOnLoad(gameObject);
+                singleton = this; 
             }
             else
             {
