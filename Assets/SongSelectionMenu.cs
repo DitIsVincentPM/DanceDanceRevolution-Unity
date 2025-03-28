@@ -38,7 +38,7 @@ public class SongSelectionMenu : MonoBehaviour
     {
         if (!isActive) return;
         
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
         {
             OnSelect();
             return;
