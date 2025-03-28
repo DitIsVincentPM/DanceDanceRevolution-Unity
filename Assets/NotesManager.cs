@@ -4,14 +4,11 @@ using TMPro;
 
 public class NotesManager : MonoBehaviour
 {
-    [Range(1f, 10f)]
-    public float noteScrollSpeed = 2f;  // Adjusted base scroll speed multiplier
+    [Range(1f, 10f)] public float noteScrollSpeed = 2f; // Adjusted base scroll speed multiplier
 
-    [Range(0.1f, 5f)]
-    public float scrollSpeedMultiplier = 1f;  // Additional multiplier for faster songs
+    [Range(0.1f, 5f)] public float scrollSpeedMultiplier = 1f; // Additional multiplier for faster songs
 
-    [Range(0.1f, 10f)]
-    public float noteScrollTime = 3f;  // Adjusted time before the note should be hit
+    [Range(0.1f, 10f)] public float noteScrollTime = 3f; // Adjusted time before the note should be hit
 
     public RectTransform notesParentCanvas;
 
@@ -27,63 +24,127 @@ public class NotesManager : MonoBehaviour
     private float songStartTime;
 
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text scoreNumberText;
     [SerializeField] private TMP_Text comboText;
     [SerializeField] private Animator scoreTextAnimator;
     [SerializeField] private Animator comboTextAnimator;
 
-    [Header("Hit Detection Settings")]
-    public float perfectHitThreshold = 0.05f; // 5% of note scroll time
-    public float greatHitThreshold = 0.10f;   // 10% of note scroll time
-    public float goodHitThreshold = 0.15f;    // 15% of note scroll time
-    public float okHitThreshold = 0.20f;      // 20% of note scroll time
+    [Header("Hit Detection Settings")] public float perfectHitThreshold = 0.05f; // 5% of note scroll time
+    public float greatHitThreshold = 0.10f; // 10% of note scroll time
+    public float goodHitThreshold = 0.15f; // 15% of note scroll time
+    public float okHitThreshold = 0.20f; // 20% of note scroll time
 
     private int score = 0;
     private int combo = 0;
 
     void Update()
+{
+    if (audioSource == null || !audioSource.isPlaying) return;
+
+    // Check for F6 key press to reset the song
+    if (Input.GetKeyDown(KeyCode.F6))
     {
-        if (audioSource == null || !audioSource.isPlaying) return;
+        ResetSong();
+    }
 
-        // Check for F6 key press to reset the song
-        if (Input.GetKeyDown(KeyCode.F6))
-        {
-            ResetSong();
-        }
+    float songTime = audioSource.time;
 
-        float songTime = audioSource.time;
+    // Spawn notes exactly "noteScrollTime" before they should be hit
+    while (nextNoteIndex < notes.Count && notes[nextNoteIndex].time - songTime <= noteScrollTime)
+    {
+        SpawnNote(notes[nextNoteIndex]);
+        nextNoteIndex++;
+    }
 
-        // Spawn notes exactly "noteScrollTime" before they should be hit
-        while (nextNoteIndex < notes.Count && notes[nextNoteIndex].time - songTime <= noteScrollTime)
-        {
-            Debug.Log($"Spawning note at index {nextNoteIndex} with time {notes[nextNoteIndex].time}");
-            SpawnNote(notes[nextNoteIndex]);
-            nextNoteIndex++;
-        }
+    // Scroll notes down based on scroll speed
+    ScrollNotes();
 
-        // Scroll notes down based on scroll speed
-        ScrollNotes();
+    // Check for missed notes
+    CheckForMissedNotes();
 
-        // Check for missed notes
-        CheckForMissedNotes();
-
-        // Check for arrow key presses
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+    // Check for arrow key presses
+    if (Input.GetKeyDown(KeyCode.LeftArrow))
+    {
+        if (!CheckForHitInLane(0))
         {
-            CheckForHitInLane(0);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            CheckForHitInLane(1);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            CheckForHitInLane(2);
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            CheckForHitInLane(3);
+            RegisterMiss(null);
         }
     }
+    if (Input.GetKeyDown(KeyCode.DownArrow))
+    {
+        if (!CheckForHitInLane(1))
+        {
+            RegisterMiss(null);
+        }
+    }
+    if (Input.GetKeyDown(KeyCode.UpArrow))
+    {
+        if (!CheckForHitInLane(2))
+        {
+            RegisterMiss(null);
+        }
+    }
+    if (Input.GetKeyDown(KeyCode.RightArrow))
+    {
+        if (!CheckForHitInLane(3))
+        {
+            RegisterMiss(null);
+        }
+    }
+}
+
+bool CheckForHitInLane(int lane)
+{
+    Note closestNote = null;
+    float bestDistance = float.MaxValue;
+    int bestIndex = -1;
+
+    // Find the closest hittable note in this lane
+    for (int i = 0; i < activeNotes.Count; i++)
+    {
+        Note note = activeNotes[i];
+        if (note == null || note.noteData.lane != lane)
+            continue;
+
+        Transform hitPosition = GetHitPosition(lane);
+        float distance = Mathf.Abs(note.transform.position.y - hitPosition.position.y);
+
+        // Only consider notes within hit range
+        float maxDistance = 20f; // Adjusted to use the new distance-based threshold
+
+        if (distance < maxDistance && distance < bestDistance)
+        {
+            bestDistance = distance;
+            closestNote = note;
+            bestIndex = i;
+        }
+    }
+
+    // Hit the closest note if found
+    if (closestNote != null && bestIndex >= 0)
+    {
+        float hitAccuracy = CalculateHitAccuracy(closestNote);
+        RegisterHit(closestNote, hitAccuracy);
+        activeNotes.RemoveAt(bestIndex);
+        Destroy(closestNote.gameObject);
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+public void RegisterMiss(Note note)
+{
+    scoreText.text = "MISS";
+    scoreTextAnimator.SetInteger("score", 1);
+    scoreTextAnimator.SetTrigger("NewHit");
+    combo = 0;
+    comboTextAnimator.SetTrigger("ComboLost");
+    UpdateUI();
+}
 
     void ScrollNotes()
     {
@@ -100,11 +161,10 @@ public class NotesManager : MonoBehaviour
     public void InitializeNotes(List<NoteData> noteDataList, AudioSource audioSource)
     {
         this.audioSource = audioSource;
-        
+
         notes = noteDataList;
         nextNoteIndex = 0;
         activeNotes.Clear();
-        Debug.Log($"Initialized {notes.Count} notes.");
     }
 
     void SpawnNote(NoteData note)
@@ -142,7 +202,6 @@ public class NotesManager : MonoBehaviour
         {
             noteComponent.Initialize(spawnPos, endPos, hitPos, this, note);
             activeNotes.Add(noteComponent);
-            Debug.Log($"Note spawned for lane {note.lane} at time {note.time}, position: {spawnPos}");
         }
         else
         {
@@ -150,55 +209,19 @@ public class NotesManager : MonoBehaviour
             Destroy(spawnedNote);
         }
     }
-
-    void CheckForHitInLane(int lane)
-    {
-        Note closestNote = null;
-        float bestDistance = float.MaxValue;
-        int bestIndex = -1;
-
-        // Find the closest hittable note in this lane
-        for (int i = 0; i < activeNotes.Count; i++)
-        {
-            Note note = activeNotes[i];
-            if (note == null || note.noteData.lane != lane)
-                continue;
-
-            Transform hitPosition = GetHitPosition(lane);
-            float distance = Mathf.Abs(note.transform.position.y - hitPosition.position.y);
-
-            // Only consider notes within hit range
-            float maxDistance = noteScrollSpeed * scrollSpeedMultiplier * okHitThreshold * noteScrollTime;
-            if (distance < maxDistance && distance < bestDistance)
-            {
-                bestDistance = distance;
-                closestNote = note;
-                bestIndex = i;
-            }
-        }
-
-        // Hit the closest note if found
-        if (closestNote != null && bestIndex >= 0)
-        {
-            float hitAccuracy = CalculateHitAccuracy(closestNote);
-            RegisterHit(closestNote, hitAccuracy);
-            activeNotes.RemoveAt(bestIndex);
-            Destroy(closestNote.gameObject);
-
-            Debug.Log($"Note hit with accuracy: {hitAccuracy * 100}%");
-        }
-    }
-
-    float CalculateHitAccuracy(Note note)
+    
+    private float CalculateHitAccuracy(Note note)
     {
         Transform hitPosition = GetHitPosition(note.noteData.lane);
         float distance = Mathf.Abs(note.transform.position.y - hitPosition.position.y);
 
-        // Calculate how close to perfect the hit was (0.0 = perfect, 1.0 = max allowed distance)
-        float maxDistance = noteScrollSpeed * scrollSpeedMultiplier * okHitThreshold * noteScrollTime;
+        // Calculate the maximum allowed distance for a hit
+        float maxDistance = noteScrollSpeed * scrollSpeedMultiplier * noteScrollTime;
+
+        // Normalize the distance to a value between 0 and 1
         float normalizedAccuracy = distance / maxDistance;
 
-        // Return inverted value so 1.0 = perfect, 0.0 = barely hit
+        // Invert the value so 1.0 = perfect, 0.0 = barely hit
         return 1.0f - Mathf.Clamp01(normalizedAccuracy);
     }
 
@@ -213,13 +236,11 @@ public class NotesManager : MonoBehaviour
             Transform hitPosition = GetHitPosition(note.noteData.lane);
 
             // Calculate miss threshold as a distance below the note's position
-            float missThreshold = note.transform.position.y - (noteScrollSpeed * scrollSpeedMultiplier * noteScrollTime * 0.3f);
+            float missThreshold = note.transform.position.y -
+                                  (noteScrollSpeed * scrollSpeedMultiplier * noteScrollTime * 0.3f);
 
             if (note.transform.position.y < missThreshold)
             {
-                // Debug the position to understand what's happening
-                Debug.Log($"Miss: Note y={note.transform.position.y}, Threshold={missThreshold}, Difference={note.transform.position.y - missThreshold}");
-
                 RegisterMiss(note);
                 activeNotes.RemoveAt(i);
                 Destroy(note.gameObject);
@@ -227,33 +248,34 @@ public class NotesManager : MonoBehaviour
         }
     }
 
-    public void RegisterHit(Note note, float accuracy)
+
+    void RegisterHit(Note note, float accuracy)
     {
         // Convert accuracy to a more readable percentage
         float accuracyPercent = accuracy * 100f;
 
-        if (accuracyPercent >= (1.0f - perfectHitThreshold) * 100f)
+        if (accuracyPercent >= 80)
         {
             scoreText.text = "PERFECT!";
             scoreTextAnimator.SetInteger("score", 4);
             score += combo == 0 ? 300 : 300 * combo;
             combo++;
         }
-        else if (accuracyPercent >= (1.0f - greatHitThreshold) * 100f)
+        else if (accuracyPercent >= 60)
         {
             scoreText.text = "GREAT!";
             scoreTextAnimator.SetInteger("score", 3);
             score += combo == 0 ? 150 : 150 * combo;
             combo++;
         }
-        else if (accuracyPercent >= (1.0f - goodHitThreshold) * 100f)
+        else if (accuracyPercent >= 30)
         {
             scoreText.text = "GOOD";
             scoreTextAnimator.SetInteger("score", 2);
             score += combo == 0 ? 100 : 100 * combo;
             combo++;
         }
-        else if (accuracyPercent >= (1.0f - okHitThreshold) * 100f)
+        else if (accuracyPercent >= 10)
         {
             scoreText.text = "OK";
             scoreTextAnimator.SetInteger("score", 2);
@@ -280,19 +302,10 @@ public class NotesManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void RegisterMiss(Note note)
-    {
-        scoreText.text = "MISS";
-        scoreTextAnimator.SetInteger("score", 1);
-        scoreTextAnimator.SetTrigger("NewHit");
-        combo = 0;
-        comboTextAnimator.SetTrigger("ComboLost");
-        UpdateUI();
-    }
-
     void UpdateUI()
     {
         comboText.text = combo > 1 ? combo.ToString() : "";
+        scoreNumberText.text = score.ToString();
     }
 
     GameObject GetNotePrefab(int lane)
@@ -353,6 +366,7 @@ public class NotesManager : MonoBehaviour
         {
             Destroy(note.gameObject);
         }
+
         activeNotes.Clear();
 
         // Reset song time and notes

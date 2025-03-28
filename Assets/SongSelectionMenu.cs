@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections;
 
 public class SongSelectionMenu : MonoBehaviour
 {
@@ -9,9 +9,8 @@ public class SongSelectionMenu : MonoBehaviour
     [SerializeField] private Transform songListContent;
     [SerializeField] private ScrollRect scrollRect;
 
-    // Configuration for selection scale and scrolling
     [SerializeField] private float selectedItemScale = 1.05f;
-    [SerializeField] private float scrollPaddingFactor = 0.15f;
+    [SerializeField] private float scrollSpeed = 10f;
 
     private List<Song> songs = new List<Song>();
     private List<GameObject> songItems = new List<GameObject>();
@@ -38,31 +37,36 @@ public class SongSelectionMenu : MonoBehaviour
     void Update()
     {
         if (!isActive) return;
-
+        
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            OnSelect();
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            OnNavigateUp();
+            OnNavigateLeft();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            OnNavigateDown();
+            OnNavigateRight();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            OnSelect();
+            OnNavigateUp();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            OnNavigateDown();
         }
     }
 
     private void LoadSongsFromResources()
     {
         songs.Clear();
-
-        // Load all Song scriptable objects from the Resources/Songs folder
         Song[] loadedSongs = Resources.LoadAll<Song>("Songs");
-
         foreach (Song song in loadedSongs)
         {
-            // Make sure we have only one instance of each song
             if (!songs.Contains(song))
             {
                 songs.Add(song);
@@ -73,14 +77,12 @@ public class SongSelectionMenu : MonoBehaviour
 
     private void PopulateSongList()
     {
-        // Clear existing items
         foreach (GameObject item in songItems)
         {
             Destroy(item);
         }
         songItems.Clear();
 
-        // Create new items
         foreach (Song song in songs)
         {
             GameObject itemObj = Instantiate(songItemPrefab, songListContent);
@@ -93,44 +95,47 @@ public class SongSelectionMenu : MonoBehaviour
 
             songItems.Add(itemObj);
         }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(songListContent as RectTransform);
     }
 
     private void UpdateSelection()
     {
-        // Update visual selection for all items
         for (int i = 0; i < songItems.Count; i++)
         {
             SongItem item = songItems[i].GetComponent<SongItem>();
             if (item != null)
             {
-                if (i == selectedIndex)
-                {
-                    item.transform.localScale = Vector3.one * selectedItemScale;
-                }
-                else
-                {
-                    item.transform.localScale = Vector3.one;
-                }
+                item.transform.localScale = (i == selectedIndex) ? Vector3.one * selectedItemScale : Vector3.one;
             }
         }
+        CenterOnSelectedItem();
+    }
+
+    private void OnNavigateLeft()
+    {
+        ChangeSelection(-1);
+    }
+
+    private void OnNavigateRight()
+    {
+        ChangeSelection(1);
     }
 
     private void OnNavigateUp()
     {
-        ChangeSelection(-1);
-        SoundEffectManager.Instance.PlaySelectSound();
+        if(selectedIndex < 3) return;
+        ChangeSelection(-3); // Move up a row
     }
 
     private void OnNavigateDown()
     {
-        ChangeSelection(1);
-        SoundEffectManager.Instance.PlaySelectSound();
+        if(selectedIndex > songs.Count - 4) return;
+        ChangeSelection(3); // Move down a row
     }
 
     private void OnSelect()
     {
-        // Ensure the game object is active before starting the coroutine
-        gameObject.SetActive(true);
         StartSelectedSong();
     }
 
@@ -139,62 +144,52 @@ public class SongSelectionMenu : MonoBehaviour
         int previousIndex = selectedIndex;
         selectedIndex = Mathf.Clamp(selectedIndex + direction, 0, songs.Count - 1);
 
-        // Only update and scroll if the selection actually changed
         if (previousIndex != selectedIndex)
         {
             UpdateSelection();
-            ScrollToSelected();
         }
     }
 
-    private void ScrollToSelected()
+    private void CenterOnSelectedItem()
     {
         if (scrollRect != null && songItems.Count > 0 && selectedIndex >= 0 && selectedIndex < songItems.Count)
         {
-            // Calculate position based on selected index
-            float itemHeight = (songItems[0].transform as RectTransform).rect.height;
-            float viewportHeight = scrollRect.viewport.rect.height;
-            float contentHeight = (songListContent as RectTransform).rect.height;
+            RectTransform selectedItemRect = songItems[selectedIndex].GetComponent<RectTransform>();
+            RectTransform contentRect = songListContent.GetComponent<RectTransform>();
+            RectTransform viewportRect = scrollRect.viewport;
 
-            // Get the actual position of the selected item
-            float itemPosition = (songItems[selectedIndex].transform as RectTransform).anchoredPosition.y;
+            // Calculate the position of the selected item in the content's local space
+            Vector2 itemLocalPosition = selectedItemRect.localPosition;
 
-            // Calculate normalized position (0-1)
-            float normalizedPosition = 1f - (itemPosition / (contentHeight - viewportHeight));
+            // Calculate the offset needed to center the selected item
+            float offsetY = -itemLocalPosition.y - (viewportRect.rect.height / 2) + (selectedItemRect.rect.height / 2);
 
-            // Add padding to center the item better
-            float centeringOffset = (itemHeight * 0.5f) / contentHeight;
-            normalizedPosition += centeringOffset;
+            // Clamp the offset to ensure the content doesn't scroll out of bounds
+            float clampedY = Mathf.Clamp(offsetY, 0, contentRect.rect.height - viewportRect.rect.height);
 
-            // Add additional fine-tuning padding
-            normalizedPosition += scrollPaddingFactor * (selectedIndex - songs.Count / 2) / songs.Count;
-
-            // Ensure it stays within valid range
-            normalizedPosition = Mathf.Clamp01(normalizedPosition);
-
-            // Smooth scroll to position
-            StartCoroutine(SmoothScrollToPosition(normalizedPosition));
+            // Start the smooth scrolling coroutine
+            StartCoroutine(SmoothScrollToPosition(clampedY));
         }
     }
 
-    private System.Collections.IEnumerator SmoothScrollToPosition(float targetPosition)
+    private IEnumerator SmoothScrollToPosition(float targetY)
     {
-        float duration = 0.3f;
+        RectTransform contentRect = songListContent.GetComponent<RectTransform>();
+        float startY = contentRect.anchoredPosition.y;
         float elapsedTime = 0f;
-        float startPosition = scrollRect.verticalNormalizedPosition;
+        float duration = 0.3f; // Adjust the duration as needed
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);
-            float smoothT = Mathf.SmoothStep(0f, 1f, t);
-            scrollRect.verticalNormalizedPosition = Mathf.Lerp(startPosition, targetPosition, smoothT);
+            float newY = Mathf.Lerp(startY, targetY, elapsedTime / duration);
+            contentRect.anchoredPosition = new Vector2(contentRect.anchoredPosition.x, newY);
             yield return null;
         }
 
-        scrollRect.verticalNormalizedPosition = targetPosition;
+        contentRect.anchoredPosition = new Vector2(contentRect.anchoredPosition.x, targetY);
     }
-
+    
     private void StartSelectedSong()
     {
         if (songs.Count > 0 && selectedIndex >= 0 && selectedIndex < songs.Count)
@@ -202,18 +197,11 @@ public class SongSelectionMenu : MonoBehaviour
             Song selectedSong = songs[selectedIndex];
             Debug.Log($"Starting song: {selectedSong.songTitle}");
 
-            // Play sound effect
-            SoundEffectManager.Instance.PlaySound(SoundEffectManager.Instance.audioSelectClip, 1.0f);
-
             try
             {
-                // Change the game state
                 GameManager.singleton.StartGame();
-
-                // Deactivate the song selection screen
                 gameObject.SetActive(false);
 
-                // Small delay before loading the song
                 if (SongManager.instance != null)
                 {
                     SongManager.instance.songName = selectedSong.songTitle;
@@ -228,21 +216,6 @@ public class SongSelectionMenu : MonoBehaviour
             {
                 Debug.LogError($"Error starting song: {e.Message}");
             }
-        }
-    }
-
-    private System.Collections.IEnumerator LoadSongWithDelay(string songTitle, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (SongManager.instance != null)
-        {
-            SongManager.instance.songName = songTitle;
-            SongManager.instance.LoadSong(songTitle);
-        }
-        else
-        {
-            Debug.LogError("SongManager instance is null!");
         }
     }
 }

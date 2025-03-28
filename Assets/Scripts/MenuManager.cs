@@ -5,13 +5,15 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager singleton;
-
-    public string currentScreen = "Type";
-
+    
     void Start()
     {
         if (singleton == null) singleton = this; else if (singleton != this) Destroy(gameObject);
         backgroundImage.sprite = backgroundSprite;
+        
+        // Make sure these are disabled. They will be enabled when needed
+        songSelectionScreen.SetActive(false);
+        gameScreen.SetActive(false);
     }
 
     [SerializeField] private AudioSource audioSource;
@@ -23,13 +25,11 @@ public class MenuManager : MonoBehaviour
 
     public void OpenSongSelectionScreen()
     {
-        currentScreen = "Song";
         songSelectionScreen.SetActive(true);
     }
 
     public void SongLoaded()
     {
-        currentScreen = "Game";
         menuAnimator.SetTrigger("NoAnimation");
 
         songSelectionScreen.SetActive(false);
